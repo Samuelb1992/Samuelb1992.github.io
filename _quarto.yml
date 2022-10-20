@@ -3,14 +3,16 @@ project:
   output-dir: docs
 
 website:
-  title: "Portafolio blog2"
+  title: "Samuel Beltrán"
   navbar:
-    right:
+    background: "#00ABB3"
+    foreground: "white"
+    left:
+      - text: "Inicio"
+        file: index.qmd
       - about.qmd
       - icon: github
         href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
 format:
   html:
     theme: yeti

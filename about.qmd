@@ -1,19 +1,16 @@
 ---
-title: "About"
-image: profile.jpg
+title: "Acerca de mi"
+image: IMG_6309.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/samuelbeltranlastra/
     - icon: github
       text: Github
-      href: https://github.com
+      href: https://github.com/Samuelb1992
 
 ---
 
-About this blog
+Hola mi nombre es Samuel Beltrán, soy de Chile y soy Ingeniero Civil Industrial de profesión. Me interesan los temas relacionados al Análisis de Datos, Ciencia de Datos, Data Analytics, entre otros. Espero puedas encontrar material que sea de tu interés y ayuda en este blog.
