@@ -6,7 +6,7 @@ website:
   title: "Samuel Beltrán"
   navbar:
     background: "#00ABB3"
-    foreground: "white"
+    foreground: "#FFFFFF"
     left:
       - text: "Inicio"
         file: index.qmd
