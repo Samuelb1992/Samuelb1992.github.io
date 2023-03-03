@@ -15,8 +15,7 @@ website:
         href: https://github.com/
 format:
   html:
-    theme: yeti
-    css: styles.css
+    theme: theme.scss
 
 
 

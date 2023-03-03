@@ -1,0 +1,240 @@
+---
+title: "Airbnb Santiago"
+date: "2022-10-11"
+categories: [R, PCA, EDA]
+image: "santiago.jpg"
+toc: true
+toc-location: body
+toc-title: "Tabla de Contenidos"
+number-sections: true
+---
+
+```{r librerias}
+#| warning: false
+#| echo: false
+library(clickR)
+library(lubridate)
+library(tidyverse)
+library(readxl)
+library(stringr)
+library(knitr)
+library(kableExtra)
+library(FactoMineR)
+library(ropls)
+library(factoextra)
+```
+
+<!-- ![Foto de <a href="https://unsplash.com/es/@caaaaaaaaaio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Caio Silva</a> en <a href="https://unsplash.com/es?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
+
+<!--   ](santiago.jpg){height=60px width=100%} -->
+
+Este es el primero de una serie de post donde se analizará un conjunto de datos sobre alojamientos Airbnb en Santiago de Chile.
+
+# Datos - Introducción
+
+En diferentes ciudades del mundo, principalmente en las capitales se ha visto un fuerte incremento de arriendos (alquileres) de viviendas para fines vacacionales/ocio.
+
+Por esto, la ONG [Inside Airbnb](http://insideairbnb.com) con el fin de cuantificar el impacto que esto provoca en la comunidad recopila datos (mediante técnicas de scraping) de los alojamientos ofrecidos a través de Airbnb.
+
+En este caso se analizaron los datos de los alojamientos ofrecidos al día **22 de Septiembre en Santiago de Chile.**
+
+# Análisis Exploratorio
+
+```{r Carga_datos}
+#| echo: false
+air.stgo <- read.csv("listings-3.csv",na.strings = c("N/A",""), header = TRUE)
+```
+
+El conjunto de datos tiene **`r nrow(air.stgo)` observaciones (alojamientos) con `r ncol(air.stgo)` variables** (características de los alojamientos). Cada una de estas variables está descrita detalladamente en el [Diccionario de datos](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit?usp=sharing).
+
+Algunas variables del dataset analizar son:
+
+```{r}
+#| echo: false
+select.variables <-  c(
+                       'name',
+                       'bedrooms',
+                       'beds',
+                       'amenities',
+                       'price',
+                       'number_of_reviews',
+                       'first_review',
+                       'last_review',
+                       'review_scores_rating',
+                       'reviews_per_month')
+desc.variables <-  c(
+                       'Nombre',
+                       'Número de habitaciones',
+                       'Cantidad total de camas',
+                       'Servicios adicionales como Wifi, Calefacción, Gym, etc.',
+                       'Precio por noche',
+                       'Número de reseñas recibidas',
+                       'Fecha de la primera reseña recibida',
+                       'Fecha de la última reseña recibida',
+                       'Puntaje general del alojamiento',
+                       'Cantidad de reseñas por mes que recibe el alojamiento')
+
+table.dic <- data.frame("Variable" = select.variables , "Descripción" = desc.variables)
+
+table.dic %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
+
+
+```
+
+## Variables
+
+Se ve a que clase corresponde cada variable:
+
+```{r}
+#| echo: false
+class.sapply <- do.call(rbind,lapply(air.stgo,class)) %>% as.data.frame() %>% rename(type_class = V1)
+list.class <- class.sapply %>% split(.$type_class)
+```
+
+```{r}
+#| echo: false
+list.class %>% 
+kbl(col.names = NULL) %>% 
+kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)%>% 
+scroll_box(height = "200px")
+```
+
+```{r}
+#| echo: false
+t(sapply(list.class,dim)[1,]) %>% 
+  kbl() %>% 
+  kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
+```
+
+Se tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables. Ej. *price* está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis.
+
+```{r Conversiones}
+#| include: false
+# to date
+air.stgo$host_since <- ymd(air.stgo$host_since)
+# remove % string and numeric
+air.stgo$host_response_rate <- str_remove(air.stgo$host_response_rate,"%") %>% as.numeric()
+# remove % string and numeric
+air.stgo$host_acceptance_rate <- str_remove(air.stgo$host_acceptance_rate,"%") %>% as.numeric()
+# to numeric
+air.stgo$host_is_superhost <- ifelse(air.stgo$host_is_superhost == "t",1,0)
+# to numeric
+air.stgo$host_has_profile_pic <- ifelse(air.stgo$host_has_profile_pic == "t",1,0)
+# to numeric
+air.stgo$bathrooms_text <- as.numeric(gsub("([0-9]+).*$", "\\1", air.stgo$bathrooms_text))
+# remove currency and format to numeric
+air.stgo$price <- gsub(",","",gsub("\\$","",air.stgo$price)) %>% as.numeric()
+# to numeric
+air.stgo$has_availability <- ifelse(air.stgo$has_availability == "t",1,0)
+# to numeric
+air.stgo$instant_bookable <- ifelse(air.stgo$instant_bookable == "t",1,0)
+# to date
+air.stgo$first_review <- ymd(air.stgo$first_review)
+air.stgo$last_review <- ymd(air.stgo$last_review)
+```
+
+# Análisis de Componentes Principales (PCA)
+
+Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico o en su caso binarias (0/1).
+
+*Si se quisieran incluir variables de tipo categórico en este análisis se podría transformar estas variables en variables dummy, aunque no es el objetivo de este análisis*
+
+```{r Filtrado}
+# Seleccionar variables de tipo numerico
+var.pca <- do.call(rbind, lapply(air.stgo, class))%>% 
+  as.data.frame() %>% 
+  filter(V1 %in% c("numeric", "integer")) %>% 
+  rownames()
+# Filtrado de variables que no se utilizaran ( ids , ubicacion)
+var.pca <- var.pca[!var.pca %in% c("id","scrape_id","host_id","latitude","longitude")]
+```
+
+El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables de distinta escala puede llevar a resultados erróneos. 
+
+**Recomendación** : *Escalar y centrar las variables antes de aplicar PCA*
+
+Realizando el preprocesamiento y ajustando PCA con la función *PCA* de la librería *FactoMiner*:
+
+```{r PCA}
+#| warning: false
+pca.air <- PCA(scale(air.stgo[,var.pca],
+                     center = TRUE,
+                     scale = TRUE) , 
+               graph = FALSE , 
+               scale.unit = FALSE)
+fviz_eig(pca.air , addlabels = TRUE)
+```
+
+Se observa que con **7 componentes principales** se puede explicar alrededor del **67% de la variabilidad de los datos**. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.
+
+Para observar las relaciones entre las variables se verá el **Loading plot**:
+
+```{r}
+#| out-width: 100%
+fviz_pca_var(pca.air, geom = c("point" , "text") , labelsize = 2)+
+  ggtitle("Loading Plot")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+Observando el gráfico se pueden extraer las siguientes conclusiones:
+
+1. En la parte derecha del gráfico se observa un grupo de variables muy cercanas. Estas son las variables de tipo *"review"*, loas cuales son los puntajes que dejan los huéspedes al alojamiento. Viendo sus coordenadas:
+
+```{r}
+#| echo: false
+pca.air$var$coord %>%  
+  as.data.frame() %>% 
+  select(Dim.1,Dim.2) %>% 
+  arrange(desc(Dim.1)) %>% 
+  head(7) %>% 
+  kbl(digits = 3) %>% 
+  kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
+```
+
+Que estén cercanas nos indica que están **muy correlacionadas** entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc).
+Obviamente la variable ***review_scores_rating*** esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.
+
+Ya realizando algunas suposiciones más detalladas podemos observar que la variable más cercana a ***review_scores_rating*** es la variable ***review_scores_location***. De esto podríamos suponer que la plataforma **le da un mayor peso al ítem ubicación y por ende la calificación final se asemeja de mayor manera a la puntuación en este ítem**.
+
+2. En la parte izquierda , en el 3er cuadrante podemos observar a las variables de disponibilidad (***availability***) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.
+
+3. Podemos observar que las variables de "review" y "disponibilidad" están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:
+
+```{r}
+#| echo: false
+# coordenadas
+pca.coord <- 
+  pca.air$var$coord %>%  
+  as.data.frame()
+# variables review
+review.var <- pca.air$var$coord %>%
+  as.data.frame() %>%
+  select(Dim.1, Dim.2) %>%
+  arrange(desc(Dim.1)) %>%
+  head(7) %>% row.names
+# variables dispoiniblidad
+avai.var <- pca.air$var$coord %>%
+  as.data.frame() %>%
+  select(Dim.1, Dim.2) %>%
+  arrange(Dim.1) %>% head(4) %>% 
+  row.names
+
+# variables
+pca.coord$Dim.1 = round(pca.coord$Dim.1,3)
+pca.coord$Dim.2 = round(pca.coord$Dim.2,3)
+# color
+pca.coord$Dim.1 = cell_spec(pca.coord$Dim.1, color = ifelse(pca.coord$Dim.1 > 0, "green", "red"))
+pca.coord$Dim.2 = cell_spec(pca.coord$Dim.2, color = ifelse(pca.coord$Dim.2 > 0, "green", "red"))
+# print
+pca.coord[c(review.var,avai.var[-3]),] %>%
+  select(Dim.1,Dim.2) %>% 
+  kbl(escape = F) %>% 
+  kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
+```
+
+Esto implica que las variables están anticorrelacionadas, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa. Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores "reviews" tienden a tener menor disponibilidad en la plataforma.
+
+
+
