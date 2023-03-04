@@ -1,12 +1,5 @@
 [
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "posts/data-airbnb-santiago/airbnb.html",
     "href": "posts/data-airbnb-santiago/airbnb.html",
     "title": "Airbnb Santiago",
@@ -21,18 +14,11 @@
     "text": "2.1 Variables\nSe ve a que clase corresponde cada variable:\n\n\n\n\n\n\n\n\n  \n    \n\n\n\n  \n    listing_url \n    character \n  \n  \n    last_scraped \n    character \n  \n  \n    source \n    character \n  \n  \n    name \n    character \n  \n  \n    description \n    character \n  \n  \n    neighborhood_overview \n    character \n  \n  \n    picture_url \n    character \n  \n  \n    host_url \n    character \n  \n  \n    host_name \n    character \n  \n  \n    host_since \n    character \n  \n  \n    host_location \n    character \n  \n  \n    host_about \n    character \n  \n  \n    host_response_time \n    character \n  \n  \n    host_response_rate \n    character \n  \n  \n    host_acceptance_rate \n    character \n  \n  \n    host_is_superhost \n    character \n  \n  \n    host_thumbnail_url \n    character \n  \n  \n    host_picture_url \n    character \n  \n  \n    host_neighbourhood \n    character \n  \n  \n    host_verifications \n    character \n  \n  \n    host_has_profile_pic \n    character \n  \n  \n    host_identity_verified \n    character \n  \n  \n    neighbourhood \n    character \n  \n  \n    neighbourhood_cleansed \n    character \n  \n  \n    property_type \n    character \n  \n  \n    room_type \n    character \n  \n  \n    bathrooms_text \n    character \n  \n  \n    amenities \n    character \n  \n  \n    price \n    character \n  \n  \n    has_availability \n    character \n  \n  \n    calendar_last_scraped \n    character \n  \n  \n    first_review \n    character \n  \n  \n    last_review \n    character \n  \n  \n    license \n    character \n  \n  \n    instant_bookable \n    character \n  \n\n\n\n \n    \n\n\n\n  \n    host_id \n    integer \n  \n  \n    host_listings_count \n    integer \n  \n  \n    host_total_listings_count \n    integer \n  \n  \n    accommodates \n    integer \n  \n  \n    bedrooms \n    integer \n  \n  \n    beds \n    integer \n  \n  \n    minimum_nights \n    integer \n  \n  \n    maximum_nights \n    integer \n  \n  \n    minimum_minimum_nights \n    integer \n  \n  \n    maximum_minimum_nights \n    integer \n  \n  \n    minimum_maximum_nights \n    integer \n  \n  \n    maximum_maximum_nights \n    integer \n  \n  \n    availability_30 \n    integer \n  \n  \n    availability_60 \n    integer \n  \n  \n    availability_90 \n    integer \n  \n  \n    availability_365 \n    integer \n  \n  \n    number_of_reviews \n    integer \n  \n  \n    number_of_reviews_ltm \n    integer \n  \n  \n    number_of_reviews_l30d \n    integer \n  \n  \n    calculated_host_listings_count \n    integer \n  \n  \n    calculated_host_listings_count_entire_homes \n    integer \n  \n  \n    calculated_host_listings_count_private_rooms \n    integer \n  \n  \n    calculated_host_listings_count_shared_rooms \n    integer \n  \n\n\n\n \n    \n\n\n\n  \n    neighbourhood_group_cleansed \n    logical \n  \n  \n    bathrooms \n    logical \n  \n  \n    calendar_updated \n    logical \n  \n\n\n\n \n    \n\n\n\n  \n    id \n    numeric \n  \n  \n    scrape_id \n    numeric \n  \n  \n    latitude \n    numeric \n  \n  \n    longitude \n    numeric \n  \n  \n    minimum_nights_avg_ntm \n    numeric \n  \n  \n    maximum_nights_avg_ntm \n    numeric \n  \n  \n    review_scores_rating \n    numeric \n  \n  \n    review_scores_accuracy \n    numeric \n  \n  \n    review_scores_cleanliness \n    numeric \n  \n  \n    review_scores_checkin \n    numeric \n  \n  \n    review_scores_communication \n    numeric \n  \n  \n    review_scores_location \n    numeric \n  \n  \n    review_scores_value \n    numeric \n  \n  \n    reviews_per_month \n    numeric \n  \n\n\n\n \n  \n\n\n\n\n\n\n\n\n\n \n  \n    character \n    integer \n    logical \n    numeric \n  \n \n\n  \n    35 \n    23 \n    3 \n    14 \n  \n\n\n\n\n\nSe tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables. Ej. price está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "Since this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Samuel Beltrán",
     "section": "",
-    "text": "news\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\nHarlow Malloc\n\n\nOct 11, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nR\n\n\nPCA\n\n\nEDA\n\n\n\n\n\n\n\n\n\n\nOct 11, 2022\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\nTristan O’Malley\n\n\nOct 8, 2022\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "R\n\n\nPCA\n\n\nEDA\n\n\n\n\n\n\n\n\n\n\nOct 11, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
