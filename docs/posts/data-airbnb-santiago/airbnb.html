@@ -124,7 +124,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -145,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <a class="nav-link" href="../../about.html">Acerca de mi</a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/Samuelb1992"><i class="bi bi-github" role="img">
 </i> 
  </a>
   </li>  
@@ -158,6 +158,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Tabla de Contenidos</h2>
+   
+  <ul>
+  <li><a href="#datos---introducción" id="toc-datos---introducción" class="nav-link active" data-scroll-target="#datos---introducción">Datos - Introducción</a></li>
+  <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio" class="nav-link" data-scroll-target="#análisis-exploratorio">Análisis Exploratorio</a>
+  <ul class="collapse">
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a>
+  <ul class="collapse">
+  <li><a href="#valores-faltantes" id="toc-valores-faltantes" class="nav-link" data-scroll-target="#valores-faltantes">Valores Faltantes</a></li>
+  <li><a href="#eliminación-variables" id="toc-eliminación-variables" class="nav-link" data-scroll-target="#eliminación-variables">Eliminación Variables</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#análisis-de-componentes-principales-pca" id="toc-análisis-de-componentes-principales-pca" class="nav-link" data-scroll-target="#análisis-de-componentes-principales-pca">Análisis de Componentes Principales (PCA)</a></li>
+  </ul>
+</nav>
+</nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
@@ -190,32 +208,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   
 
 </header>
-<nav id="TOC" role="doc-toc">
-    <h2 id="toc-title">Tabla de Contenidos</h2>
-   
-  <ul>
-  <li><a href="#datos---introducción" id="toc-datos---introducción"> <span class="header-section-number">1</span> Datos - Introducción</a></li>
-  <li><a href="#análisis-exploratorio" id="toc-análisis-exploratorio"> <span class="header-section-number">2</span> Análisis Exploratorio</a>
-  <ul>
-  <li><a href="#variables" id="toc-variables"> <span class="header-section-number">2.1</span> Variables</a></li>
-  </ul></li>
-  <li><a href="#análisis-de-componentes-principales-pca" id="toc-análisis-de-componentes-principales-pca"> <span class="header-section-number">3</span> Análisis de Componentes Principales (PCA)</a></li>
-  </ul>
-</nav>
+
 <div class="cell">
 
 </div>
 <!-- ![Foto de <a href="https://unsplash.com/es/@caaaaaaaaaio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Caio Silva</a> en <a href="https://unsplash.com/es?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
 <!--   ](santiago.jpg){height=60px width=100%} -->
 <p>Este es el primero de una serie de post donde se analizará un conjunto de datos sobre alojamientos Airbnb en Santiago de Chile.</p>
-<section id="datos---introducción" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Datos - Introducción</h1>
+<section id="datos---introducción" class="level1">
+<h1>Datos - Introducción</h1>
 <p>En diferentes ciudades del mundo, principalmente en las capitales se ha visto un fuerte incremento de arriendos (alquileres) de viviendas para fines vacacionales/ocio.</p>
 <p>Por esto, la ONG <a href="http://insideairbnb.com">Inside Airbnb</a> con el fin de cuantificar el impacto que esto provoca en la comunidad recopila datos (mediante técnicas de scraping) de los alojamientos ofrecidos a través de Airbnb.</p>
 <p>En este caso se analizaron los datos de los alojamientos ofrecidos al día <strong>22 de Septiembre en Santiago de Chile.</strong></p>
 </section>
-<section id="análisis-exploratorio" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Análisis Exploratorio</h1>
+<section id="análisis-exploratorio" class="level1">
+<h1>Análisis Exploratorio</h1>
 <div class="cell">
 
 </div>
@@ -277,9 +284,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-<section id="variables" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="variables"><span class="header-section-number">2.1</span> Variables</h2>
-<p>Se ve a que clase corresponde cada variable:</p>
+<section id="variables" class="level2">
+<h2 class="anchored" data-anchor-id="variables">Variables</h2>
+<p>Para entender mejor el dataset y las variables que se analizarán veremos la clase actual de cada variable.</p>
 <div class="cell">
 
 </div>
@@ -651,49 +658,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </div>
 </div>
-<p>Se tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables. Ej. <em>price</em> está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis.</p>
+<p>Se tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables.</p>
+<p>Ej. <strong>price</strong> está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis.</p>
+<p>Se realizarán conversiones de variables de tipo carácter a tipo fecha usando la librería <strong>lubridate</strong> , librería especializada en manejar variables de tipo fecha.</p>
+<p>Algunas conversiones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># to date</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>host_since <span class="ot">&lt;-</span> <span class="fu">ymd</span>(air.stgo<span class="sc">$</span>host_since)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove % string and numeric</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>host_response_rate <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(air.stgo<span class="sc">$</span>host_response_rate,<span class="st">"%"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># remove % string and numeric</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>host_acceptance_rate <span class="ot">&lt;-</span> <span class="fu">str_remove</span>(air.stgo<span class="sc">$</span>host_acceptance_rate,<span class="st">"%"</span>) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># to numeric</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>host_is_superhost <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(air.stgo<span class="sc">$</span>host_is_superhost <span class="sc">==</span> <span class="st">"t"</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># to numeric</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>host_has_profile_pic <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(air.stgo<span class="sc">$</span>host_has_profile_pic <span class="sc">==</span> <span class="st">"t"</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove all text and get number</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>bathrooms_text <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">gsub</span>(<span class="st">"([0-9]+).*$"</span>, <span class="st">"</span><span class="sc">\\</span><span class="st">1"</span>, air.stgo<span class="sc">$</span>bathrooms_text))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># remove currency and format to numeric</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>price <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">","</span>,<span class="st">""</span>,<span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">$"</span>,<span class="st">""</span>,air.stgo<span class="sc">$</span>price)) <span class="sc">%&gt;%</span> <span class="fu">as.numeric</span>()</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># to numeric</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>has_availability <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(air.stgo<span class="sc">$</span>has_availability <span class="sc">==</span> <span class="st">"t"</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># to numeric</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>instant_bookable <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(air.stgo<span class="sc">$</span>instant_bookable <span class="sc">==</span> <span class="st">"t"</span>,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># to date</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>first_review <span class="ot">&lt;-</span> <span class="fu">ymd</span>(air.stgo<span class="sc">$</span>first_review)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>air.stgo<span class="sc">$</span>last_review <span class="ot">&lt;-</span> <span class="fu">ymd</span>(air.stgo<span class="sc">$</span>last_review)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="valores-faltantes" class="level3">
+<h3 class="anchored" data-anchor-id="valores-faltantes">Valores Faltantes</h3>
+<p>Verifiquemos si existen valores faltantes en los datos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculo % NA por columna</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>na.count <span class="ot">&lt;-</span> <span class="fu">apply</span>(air.stgo,<span class="dv">2</span>, <span class="cf">function</span>(x) <span class="dv">100</span><span class="sc">*</span><span class="fu">sum</span>(<span class="fu">is.na</span>(x))<span class="sc">/</span><span class="fu">nrow</span>(air.stgo))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Orden de variables de mayor a menor NA</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>na.count <span class="ot">&lt;-</span> na.count[<span class="fu">order</span>(na.count , <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase margin size</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">11</span>,<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">4</span>))</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot de columnas que tienen valores faltantes</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(na.count[na.count <span class="sc">&gt;</span> <span class="dv">0</span>], </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">las =</span> <span class="dv">2</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Porcentaje de Valores Faltantes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="airbnb_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Se eliminarán directamente las variables:</p>
+<ul>
+<li>neighbourhood_group_cleansed</li>
+<li>bathrooms</li>
+<li>calendar_updated</li>
+<li>license</li>
+<li>host_neighbourhood</li>
+</ul>
+<p>ya que estas poseen más del <strong>90% de datos faltantes</strong> y no serán útiles para los posteriores análisis.</p>
+</section>
+<section id="eliminación-variables" class="level3">
+<h3 class="anchored" data-anchor-id="eliminación-variables">Eliminación Variables</h3>
+<p>Además de eliminar las variables que se comentaron en la sección anterior, también deberán eliminarse algunas variables que no aportan información ya que son <strong><em>id</em></strong> específicos o variables que contienen información de tipo descriptivo como <strong><em>links</em></strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variables con &gt; 90% de faltantes</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>var.na <span class="ot">&lt;-</span> <span class="fu">names</span>(na.count[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variables id - links</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>var.drop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>,<span class="st">"listing_url"</span>,<span class="st">"scrape_id"</span>,<span class="st">"last_scraped"</span>,<span class="st">"source"</span>,<span class="st">"picture_url"</span>,<span class="st">"host_id"</span>,<span class="st">"host_url"</span>,<span class="st">"host_about"</span>,<span class="st">"host_thumbnail_url"</span>,<span class="st">"host_picture_url"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Quitandolas del dataset</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>air.stgo <span class="ot">&lt;-</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  air.stgo <span class="sc">%&gt;%</span> </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">all_of</span>(<span class="fu">c</span>(var.na,var.drop)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
-<section id="análisis-de-componentes-principales-pca" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Análisis de Componentes Principales (PCA)</h1>
+</section>
+<section id="análisis-de-componentes-principales-pca" class="level1">
+<h1>Análisis de Componentes Principales (PCA)</h1>
 <p>Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico o en su caso binarias (0/1).</p>
 <p><em>Si se quisieran incluir variables de tipo categórico en este análisis se podría transformar estas variables en variables dummy, aunque no es el objetivo de este análisis</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar variables de tipo numerico</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>var.pca <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(air.stgo, class))<span class="sc">%&gt;%</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(V1 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"numeric"</span>, <span class="st">"integer"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrado de variables que no se utilizaran ( ids , ubicacion)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>var.pca <span class="ot">&lt;-</span> var.pca[<span class="sc">!</span>var.pca <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"id"</span>,<span class="st">"scrape_id"</span>,<span class="st">"host_id"</span>,<span class="st">"latitude"</span>,<span class="st">"longitude"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar variables de tipo numerico</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>var.pca <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(air.stgo, class))<span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(V1 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"numeric"</span>, <span class="st">"integer"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables de distinta escala puede llevar a resultados erróneos.</p>
-<p><strong>Recomendación</strong> : <em>Escalar y centrar las variables antes de aplicar PCA</em></p>
+<p>El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables puede llevar a conclusiones erróneas.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Gran parte de las veces es recomendable <strong>escalar y centrar</strong> las variables antes de aplicar PCA, ya que por lo general se tienen variables diversas con distintas escalas y magnitudes. Analiza tus datos y prueba distintas técnicas de preprocesamiento que sean coherentes con el análisis que estas realizando.</p>
+</div>
+</div>
 <p>Realizando el preprocesamiento y ajustando PCA con la función <em>PCA</em> de la librería <em>FactoMiner</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pca.air <span class="ot">&lt;-</span> <span class="fu">PCA</span>(<span class="fu">scale</span>(air.stgo[,var.pca],</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> <span class="cn">TRUE</span>) , </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">graph =</span> <span class="cn">FALSE</span> , </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">scale.unit =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.air , <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pca.air <span class="ot">&lt;-</span> <span class="fu">PCA</span>(<span class="fu">scale</span>(air.stgo[,var.pca],</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> <span class="cn">TRUE</span>) , </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">graph =</span> <span class="cn">FALSE</span> , </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">scale.unit =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.air , <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="airbnb_files/figure-html/PCA-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Se observa que con <strong>7 componentes principales</strong> se puede explicar alrededor del <strong>67% de la variabilidad de los datos</strong>. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.</p>
-<p>Para observar las relaciones entre las variables se verá el <strong>Loading plot</strong>:</p>
+<p>Se observa que con <strong>7 componentes principales</strong> se puede explicar alrededor del <strong>65% de la variabilidad de los datos</strong>. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.</p>
+<p>Para observar las relaciones entre las variables se verá el <strong>Loading plot (LP)</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca.air, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span> , <span class="st">"text"</span>) , <span class="at">labelsize =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Loading Plot"</span>)<span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca.air, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span> , <span class="st">"text"</span>) , <span class="at">labelsize =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Loading Plot"</span>)<span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="airbnb_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" style="width:100.0%"></p>
+<p><img src="airbnb_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
 </div>
 <p>Observando el gráfico se pueden extraer las siguientes conclusiones:</p>
 <ol type="1">
-<li>En la parte derecha del gráfico se observa un grupo de variables muy cercanas. Estas son las variables de tipo <em>“review”</em>, loas cuales son los puntajes que dejan los huéspedes al alojamiento. Viendo sus coordenadas:</li>
+<li>En la parte derecha del gráfico (1er cuadrante) se observa un grupo de variables muy cercanas. Estas son las variables de tipo <em>“review”</em>, los cuales son los puntajes que dejan los huéspedes al alojamiento una vez que terminaron su estancia. Si vemos sus coordenadas específicas en el LP:</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -709,49 +797,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
   <tr>
    <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:right;"> 0.588 </td>
-   <td style="text-align:right;"> 0.139 </td>
+   <td style="text-align:right;"> 0.587 </td>
+   <td style="text-align:right;"> 0.142 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:right;"> 0.576 </td>
-   <td style="text-align:right;"> 0.150 </td>
+   <td style="text-align:right;"> 0.575 </td>
+   <td style="text-align:right;"> 0.154 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:right;"> 0.567 </td>
-   <td style="text-align:right;"> 0.136 </td>
+   <td style="text-align:right;"> 0.566 </td>
+   <td style="text-align:right;"> 0.140 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:right;"> 0.549 </td>
-   <td style="text-align:right;"> 0.155 </td>
+   <td style="text-align:right;"> 0.548 </td>
+   <td style="text-align:right;"> 0.158 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:right;"> 0.537 </td>
-   <td style="text-align:right;"> 0.152 </td>
+   <td style="text-align:right;"> 0.536 </td>
+   <td style="text-align:right;"> 0.155 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:right;"> 0.508 </td>
-   <td style="text-align:right;"> 0.160 </td>
+   <td style="text-align:right;"> 0.506 </td>
+   <td style="text-align:right;"> 0.165 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:right;"> 0.497 </td>
-   <td style="text-align:right;"> 0.156 </td>
+   <td style="text-align:right;"> 0.496 </td>
+   <td style="text-align:right;"> 0.160 </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-<p>Que estén cercanas nos indica que están <strong>muy correlacionadas</strong> entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc). Obviamente la variable <strong><em>review_scores_rating</em></strong> esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.</p>
+<p>Que estén cercanas nos indica que estas variables están <strong>muy correlacionadas</strong> entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc). Obviamente la variable <strong><em>review_scores_rating</em></strong> esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.</p>
 <p>Ya realizando algunas suposiciones más detalladas podemos observar que la variable más cercana a <strong><em>review_scores_rating</em></strong> es la variable <strong><em>review_scores_location</em></strong>. De esto podríamos suponer que la plataforma <strong>le da un mayor peso al ítem ubicación y por ende la calificación final se asemeja de mayor manera a la puntuación en este ítem</strong>.</p>
 <ol start="2" type="1">
-<li><p>En la parte izquierda , en el 3er cuadrante podemos observar a las variables de disponibilidad (<strong><em>availability</em></strong>) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.</p></li>
-<li><p>Podemos observar que las variables de “review” y “disponibilidad” están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:</p></li>
+<li><p>En la parte izquierda ,en el tercer cuadrante, podemos observar a las variables de disponibilidad ( <strong><em>availability</em></strong> ) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.</p></li>
+<li><p>Podemos observar que las variables de <strong>“review”</strong> y <strong>“disponibilidad”</strong> están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:</p></li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -767,60 +855,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
   <tr>
    <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.588</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.139</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.587</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.142</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.576</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.15</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.575</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.154</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.567</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.136</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.566</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.14</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.549</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.155</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.548</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.158</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.537</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.152</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.536</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.155</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.508</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.16</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.506</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.165</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.497</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.156</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.496</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.16</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> availability_30 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.514</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.164</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.515</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.165</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> availability_60 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.5</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.137</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.501</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.138</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> availability_90 </td>
    <td style="text-align:left;"> <span style="     color: red !important;">-0.476</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.116</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.117</span> </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-<p>Esto implica que las variables están anticorrelacionadas, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa. Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores “reviews” tienden a tener menor disponibilidad en la plataforma.</p>
+<p>Esto implica que las variables están <strong>correlacionadas negativamente</strong>, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa.</p>
+<p>Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores “reviews” tienden a tener menor disponibilidad en la plataforma.</p>
 
 
 </section>

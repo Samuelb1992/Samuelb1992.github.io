@@ -4,9 +4,9 @@ date: "2022-10-11"
 categories: [R, PCA, EDA]
 image: "santiago.jpg"
 toc: true
-toc-location: body
+toc-location: left
 toc-title: "Tabla de Contenidos"
-number-sections: true
+number-sections: false
 ---
 
 ```{r librerias}
@@ -85,7 +85,7 @@ table.dic %>%
 
 ## Variables
 
-Se ve a que clase corresponde cada variable:
+Para entender mejor el dataset y las variables que se analizarán veremos la clase actual de cada variable.
 
 ```{r}
 #| echo: false
@@ -108,10 +108,16 @@ t(sapply(list.class,dim)[1,]) %>%
   kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
 ```
 
-Se tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables. Ej. *price* está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis.
+Se tienen variables del tipo carácter , numérico y booleano. Realizando una verificación al tipo de clase de cada variable se observa que será necesario realizar conversiones de tipo a ciertas variables. 
+
+Ej. **price** está del tipo carácter ya que incluye la divisa pero este formato no es útil para los posteriores análisis.
+
+Se realizarán conversiones de variables de tipo carácter a tipo fecha usando la librería **lubridate** , librería especializada en manejar variables de tipo fecha.
+
+Algunas conversiones:
 
 ```{r Conversiones}
-#| include: false
+#| warning: false
 # to date
 air.stgo$host_since <- ymd(air.stgo$host_since)
 # remove % string and numeric
@@ -122,7 +128,7 @@ air.stgo$host_acceptance_rate <- str_remove(air.stgo$host_acceptance_rate,"%") %
 air.stgo$host_is_superhost <- ifelse(air.stgo$host_is_superhost == "t",1,0)
 # to numeric
 air.stgo$host_has_profile_pic <- ifelse(air.stgo$host_has_profile_pic == "t",1,0)
-# to numeric
+# Remove all text and get number
 air.stgo$bathrooms_text <- as.numeric(gsub("([0-9]+).*$", "\\1", air.stgo$bathrooms_text))
 # remove currency and format to numeric
 air.stgo$price <- gsub(",","",gsub("\\$","",air.stgo$price)) %>% as.numeric()
@@ -134,6 +140,52 @@ air.stgo$instant_bookable <- ifelse(air.stgo$instant_bookable == "t",1,0)
 air.stgo$first_review <- ymd(air.stgo$first_review)
 air.stgo$last_review <- ymd(air.stgo$last_review)
 ```
+
+### Valores Faltantes
+
+Verifiquemos si existen valores faltantes en los datos:
+
+```{r}
+# Calculo % NA por columna
+na.count <- apply(air.stgo,2, function(x) 100*sum(is.na(x))/nrow(air.stgo))
+# Orden de variables de mayor a menor NA
+na.count <- na.count[order(na.count , decreasing = TRUE)]
+# Increase margin size
+par(mar=c(11,4,4,4))
+# Plot de columnas que tienen valores faltantes
+barplot(na.count[na.count > 0], 
+        las = 2,
+        col = "skyblue",
+        cex.names = 0.7,
+        main = "Porcentaje de Valores Faltantes")
+```
+
+Se eliminarán directamente las variables:
+
+* neighbourhood_group_cleansed
+* bathrooms
+* calendar_updated
+* license
+* host_neighbourhood
+
+ya que estas poseen más del **90% de datos faltantes** y no serán útiles para los posteriores análisis.
+
+### Eliminación Variables
+
+Además de eliminar las variables que se comentaron en la sección anterior, también deberán eliminarse algunas variables que no aportan información ya que son ***id*** específicos  o variables que contienen información de tipo descriptivo como ***links***.
+
+```{r}
+# variables con > 90% de faltantes
+var.na <- names(na.count[1:5])
+# variables id - links
+var.drop <- c("id","listing_url","scrape_id","last_scraped","source","picture_url","host_id","host_url","host_about","host_thumbnail_url","host_picture_url")
+
+# Quitandolas del dataset
+air.stgo <- 
+  air.stgo %>% 
+  select(!all_of(c(var.na,var.drop)))
+```
+
 
 # Análisis de Componentes Principales (PCA)
 
@@ -147,13 +199,15 @@ var.pca <- do.call(rbind, lapply(air.stgo, class))%>%
   as.data.frame() %>% 
   filter(V1 %in% c("numeric", "integer")) %>% 
   rownames()
-# Filtrado de variables que no se utilizaran ( ids , ubicacion)
-var.pca <- var.pca[!var.pca %in% c("id","scrape_id","host_id","latitude","longitude")]
 ```
 
-El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables de distinta escala puede llevar a resultados erróneos. 
+El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables puede llevar a conclusiones erróneas. 
 
-**Recomendación** : *Escalar y centrar las variables antes de aplicar PCA*
+:::{.callout-tip}
+Gran parte de las veces es recomendable **escalar y centrar** las variables antes de aplicar PCA, ya que por lo general se tienen variables diversas con distintas escalas y magnitudes. 
+Analiza tus datos y prueba distintas técnicas de preprocesamiento que sean coherentes con el análisis que estas realizando.
+:::
+
 
 Realizando el preprocesamiento y ajustando PCA con la función *PCA* de la librería *FactoMiner*:
 
@@ -167,9 +221,9 @@ pca.air <- PCA(scale(air.stgo[,var.pca],
 fviz_eig(pca.air , addlabels = TRUE)
 ```
 
-Se observa que con **7 componentes principales** se puede explicar alrededor del **67% de la variabilidad de los datos**. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.
+Se observa que con **7 componentes principales** se puede explicar alrededor del **65% de la variabilidad de los datos**. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.
 
-Para observar las relaciones entre las variables se verá el **Loading plot**:
+Para observar las relaciones entre las variables se verá el **Loading plot (LP)**:
 
 ```{r}
 #| out-width: 100%
@@ -180,7 +234,7 @@ fviz_pca_var(pca.air, geom = c("point" , "text") , labelsize = 2)+
 
 Observando el gráfico se pueden extraer las siguientes conclusiones:
 
-1. En la parte derecha del gráfico se observa un grupo de variables muy cercanas. Estas son las variables de tipo *"review"*, loas cuales son los puntajes que dejan los huéspedes al alojamiento. Viendo sus coordenadas:
+1. En la parte derecha del gráfico (1er cuadrante) se observa un grupo de variables muy cercanas. Estas son las variables de tipo *"review"*, los cuales son los puntajes que dejan los huéspedes al alojamiento una vez que terminaron su estancia. Si vemos sus coordenadas específicas en el LP:
 
 ```{r}
 #| echo: false
@@ -193,14 +247,14 @@ pca.air$var$coord %>%
   kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
 ```
 
-Que estén cercanas nos indica que están **muy correlacionadas** entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc).
+Que estén cercanas nos indica que estas variables están **muy correlacionadas** entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc).
 Obviamente la variable ***review_scores_rating*** esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.
 
 Ya realizando algunas suposiciones más detalladas podemos observar que la variable más cercana a ***review_scores_rating*** es la variable ***review_scores_location***. De esto podríamos suponer que la plataforma **le da un mayor peso al ítem ubicación y por ende la calificación final se asemeja de mayor manera a la puntuación en este ítem**.
 
-2. En la parte izquierda , en el 3er cuadrante podemos observar a las variables de disponibilidad (***availability***) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.
+2. En la parte izquierda ,en el tercer cuadrante, podemos observar a las variables de disponibilidad ( ***availability*** ) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.
 
-3. Podemos observar que las variables de "review" y "disponibilidad" están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:
+3. Podemos observar que las variables de **"review"** y **"disponibilidad"** están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:
 
 ```{r}
 #| echo: false
@@ -234,7 +288,8 @@ pca.coord[c(review.var,avai.var[-3]),] %>%
   kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
 ```
 
-Esto implica que las variables están anticorrelacionadas, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa. Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores "reviews" tienden a tener menor disponibilidad en la plataforma.
+Esto implica que las variables están **correlacionadas negativamente**, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa. 
 
+Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores "reviews" tienden a tener menor disponibilidad en la plataforma.
 
 
