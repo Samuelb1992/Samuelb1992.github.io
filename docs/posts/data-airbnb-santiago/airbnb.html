@@ -172,7 +172,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#eliminación-variables" id="toc-eliminación-variables" class="nav-link" data-scroll-target="#eliminación-variables">Eliminación Variables</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#análisis-de-componentes-principales-pca" id="toc-análisis-de-componentes-principales-pca" class="nav-link" data-scroll-target="#análisis-de-componentes-principales-pca">Análisis de Componentes Principales (PCA)</a></li>
+  <li><a href="#análisis-de-componentes-principales-pca" id="toc-análisis-de-componentes-principales-pca" class="nav-link" data-scroll-target="#análisis-de-componentes-principales-pca">Análisis de Componentes Principales (PCA)</a>
+  <ul class="collapse">
+  <li><a href="#loadings" id="toc-loadings" class="nav-link" data-scroll-target="#loadings">Loadings</a></li>
+  </ul></li>
   </ul>
 </nav>
 </nav>
@@ -718,11 +721,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="eliminación-variables" class="level3">
 <h3 class="anchored" data-anchor-id="eliminación-variables">Eliminación Variables</h3>
 <p>Además de eliminar las variables que se comentaron en la sección anterior, también deberán eliminarse algunas variables que no aportan información ya que son <strong><em>id</em></strong> específicos o variables que contienen información de tipo descriptivo como <strong><em>links</em></strong>.</p>
+<p>También se prescindirá de la información geográfica (latitud y longitud).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variables con &gt; 90% de faltantes</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>var.na <span class="ot">&lt;-</span> <span class="fu">names</span>(na.count[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># variables id - links</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>var.drop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>,<span class="st">"listing_url"</span>,<span class="st">"scrape_id"</span>,<span class="st">"last_scraped"</span>,<span class="st">"source"</span>,<span class="st">"picture_url"</span>,<span class="st">"host_id"</span>,<span class="st">"host_url"</span>,<span class="st">"host_about"</span>,<span class="st">"host_thumbnail_url"</span>,<span class="st">"host_picture_url"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>var.drop <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"id"</span>,<span class="st">"listing_url"</span>,<span class="st">"scrape_id"</span>,<span class="st">"last_scraped"</span>,<span class="st">"source"</span>,<span class="st">"picture_url"</span>,<span class="st">"host_id"</span>,<span class="st">"host_url"</span>,<span class="st">"host_about"</span>,<span class="st">"host_thumbnail_url"</span>,<span class="st">"host_picture_url"</span>,<span class="st">"latitude"</span>,<span class="st">"longitude"</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Quitandolas del dataset</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>air.stgo <span class="ot">&lt;-</span> </span>
@@ -734,8 +738,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="análisis-de-componentes-principales-pca" class="level1">
 <h1>Análisis de Componentes Principales (PCA)</h1>
-<p>Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico o en su caso binarias (0/1).</p>
-<p><em>Si se quisieran incluir variables de tipo categórico en este análisis se podría transformar estas variables en variables dummy, aunque no es el objetivo de este análisis</em></p>
+<p>Un PCA es una técnica estadística que permite la reducción de la dimensionalidad de una matriz de datos. Intuitivamente esta técnica nos permitirá explorar relaciones entre variables y observaciones de la manera que generalmente los humanos obtenemos conclusiones, que es a través de gráficos en dos dimensiones.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Casos de uso del PCA
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>PCA se usa en diversas aplicaciones como compresión de imágenes , biometría , bioinformática , control de calidad , entre otros.</p>
+</div>
+</div>
+<p>Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico (incluyendo binarias 0/1).</p>
+<p><strong>Si se quisieran incluir variables de tipo categórico en este análisis, se podría transformar estas variables en variables dummy (<em>0/1 para cada categoría de la variable</em>), aunque no es el objetivo de este análisis y existen otras técnicas más adecuadas para modelar datos de tipo categórico.</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar variables de tipo numerico</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>var.pca <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(air.stgo, class))<span class="sc">%&gt;%</span> </span>
@@ -750,31 +768,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Tip
+Escalado y Centrado
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Gran parte de las veces es recomendable <strong>escalar y centrar</strong> las variables antes de aplicar PCA, ya que por lo general se tienen variables diversas con distintas escalas y magnitudes. Analiza tus datos y prueba distintas técnicas de preprocesamiento que sean coherentes con el análisis que estas realizando.</p>
+<p>Gran parte de las veces es recomendable <strong>escalar (varianza unitaria) y centrar (media cero)</strong> las variables antes de aplicar PCA, ya que por lo general, se tienen diversas variables con distintas escalas y magnitudes. Analiza tus datos y prueba distintas técnicas de preprocesamiento que sean coherentes con el análisis que estas realizando.</p>
 </div>
 </div>
-<p>Realizando el preprocesamiento y ajustando PCA con la función <em>PCA</em> de la librería <em>FactoMiner</em>:</p>
+<p>Realizando el preprocesamiento y ajustando lel PCA con la función <em>PCA</em> de la librería <strong><em>FactoMiner</em></strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pca.air <span class="ot">&lt;-</span> <span class="fu">PCA</span>(<span class="fu">scale</span>(air.stgo[,var.pca],</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">center =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">scale =</span> <span class="cn">TRUE</span>) , </span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">graph =</span> <span class="cn">FALSE</span> , </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">scale.unit =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.air , <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">scale.unit =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez ajustado el modelo, el primer gráfico que observaremos será el llamado <em>scree plot</em>. Este gráfico muestra cual es el porcentaje de varianza explicada por cada componente principal.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_eig</span>(pca.air , <span class="at">addlabels =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="airbnb_files/figure-html/PCA-1.png" class="img-fluid" width="672"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="airbnb_files/figure-html/PCA_scree-1.png" style="width:70.0%;height:70.0%" class="figure-img"></p>
+</figure>
 </div>
 </div>
+</div>
+<p>Sin ahondar en lo teórico, es necesario entender que al aplicar esta técnica lo que estamos generando son <strong>nuevas variables (variables latentes)</strong>, las cuales son una <strong>combinación lineal de las variables originales</strong> e intentan “explicar” la mayor cantidad de información posible de la matriz de datos original.</p>
 <p>Se observa que con <strong>7 componentes principales</strong> se puede explicar alrededor del <strong>65% de la variabilidad de los datos</strong>. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.</p>
-<p>Para observar las relaciones entre las variables se verá el <strong>Loading plot (LP)</strong>:</p>
+<p>Notemos que el número de variables de la matriz de datos con que se realizó el PCA era de 40 y con la “nueva representación” el número de variables se reduce a 7 captando el 65% de la información original.</p>
+<section id="loadings" class="level2">
+<h2 class="anchored" data-anchor-id="loadings">Loadings</h2>
+<p>Para observar las relaciones entre las variables se verán los <strong>loading Plot (LP)</strong></p>
+<p>Primero vemos el LP de la primera componente (Dim1) vs la segunda componente (Dim2):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca.air, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span> , <span class="st">"text"</span>) , <span class="at">labelsize =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Loading Plot"</span>)<span class="sc">+</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_pca_var</span>(pca.air, <span class="at">geom =</span> <span class="fu">c</span>(<span class="st">"point"</span> , <span class="st">"text"</span>) , <span class="at">labelsize =</span> <span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Loading Plot"</span>)<span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="airbnb_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:100.0%"></p>
 </div>
@@ -797,48 +827,48 @@ Tip
 <tbody>
   <tr>
    <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:right;"> 0.587 </td>
-   <td style="text-align:right;"> 0.142 </td>
+   <td style="text-align:right;"> 0.588 </td>
+   <td style="text-align:right;"> 0.139 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:right;"> 0.575 </td>
-   <td style="text-align:right;"> 0.154 </td>
+   <td style="text-align:right;"> 0.576 </td>
+   <td style="text-align:right;"> 0.150 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:right;"> 0.566 </td>
-   <td style="text-align:right;"> 0.140 </td>
+   <td style="text-align:right;"> 0.567 </td>
+   <td style="text-align:right;"> 0.136 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:right;"> 0.548 </td>
-   <td style="text-align:right;"> 0.158 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:right;"> 0.536 </td>
+   <td style="text-align:right;"> 0.549 </td>
    <td style="text-align:right;"> 0.155 </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> review_scores_cleanliness </td>
+   <td style="text-align:right;"> 0.537 </td>
+   <td style="text-align:right;"> 0.152 </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:right;"> 0.506 </td>
-   <td style="text-align:right;"> 0.165 </td>
+   <td style="text-align:right;"> 0.508 </td>
+   <td style="text-align:right;"> 0.160 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:right;"> 0.496 </td>
-   <td style="text-align:right;"> 0.160 </td>
+   <td style="text-align:right;"> 0.497 </td>
+   <td style="text-align:right;"> 0.156 </td>
   </tr>
 </tbody>
 </table>
 
 </div>
 </div>
-<p>Que estén cercanas nos indica que estas variables están <strong>muy correlacionadas</strong> entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc). Obviamente la variable <strong><em>review_scores_rating</em></strong> esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.</p>
-<p>Ya realizando algunas suposiciones más detalladas podemos observar que la variable más cercana a <strong><em>review_scores_rating</em></strong> es la variable <strong><em>review_scores_location</em></strong>. De esto podríamos suponer que la plataforma <strong>le da un mayor peso al ítem ubicación y por ende la calificación final se asemeja de mayor manera a la puntuación en este ítem</strong>.</p>
+<p>Que estén cercanas nos indica que estas variables están <strong>muy correlacionadas</strong> entre sí. De esto se puede inferir que al evaluar un alojamiento, el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc). Obviamente la variable <strong><em>review_scores_rating</em></strong> esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.</p>
+<p>Ya realizando algunas suposiciones más detalladas, podemos observar que la variable más cercana a <strong><em>review_scores_rating</em></strong> es la variable <strong><em>review_scores_location</em></strong>. De esto podríamos suponer que la plataforma <strong>le da un mayor peso al ítem ubicación , por lo que la calificación final se asemeja de mayor manera a la puntuación en este ítem</strong>.</p>
 <ol start="2" type="1">
-<li><p>En la parte izquierda ,en el tercer cuadrante, podemos observar a las variables de disponibilidad ( <strong><em>availability</em></strong> ) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.</p></li>
+<li><p>En la parte izquierda, en el tercer cuadrante, podemos observar a las variables de disponibilidad ( <strong><em>availability</em></strong> ) muy cercanas, por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.</p></li>
 <li><p>Podemos observar que las variables de <strong>“review”</strong> y <strong>“disponibilidad”</strong> están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:</p></li>
 </ol>
 <div class="cell">
@@ -855,53 +885,53 @@ Tip
 <tbody>
   <tr>
    <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.587</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.142</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.588</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.139</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.575</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.154</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.576</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.15</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.566</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.14</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.567</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.136</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.548</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.158</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.536</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.549</span> </td>
    <td style="text-align:left;"> <span style="     color: green !important;">0.155</span> </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.506</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.165</span> </td>
+   <td style="text-align:left;"> review_scores_cleanliness </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.537</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.152</span> </td>
   </tr>
   <tr>
-   <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.496</span> </td>
+   <td style="text-align:left;"> review_scores_location </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.508</span> </td>
    <td style="text-align:left;"> <span style="     color: green !important;">0.16</span> </td>
   </tr>
   <tr>
+   <td style="text-align:left;"> review_scores_rating </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.497</span> </td>
+   <td style="text-align:left;"> <span style="     color: green !important;">0.156</span> </td>
+  </tr>
+  <tr>
    <td style="text-align:left;"> availability_30 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.515</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.165</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.514</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.164</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> availability_60 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.501</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.138</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.5</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.137</span> </td>
   </tr>
   <tr>
    <td style="text-align:left;"> availability_90 </td>
    <td style="text-align:left;"> <span style="     color: red !important;">-0.476</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.117</span> </td>
+   <td style="text-align:left;"> <span style="     color: red !important;">-0.116</span> </td>
   </tr>
 </tbody>
 </table>
@@ -909,9 +939,12 @@ Tip
 </div>
 </div>
 <p>Esto implica que las variables están <strong>correlacionadas negativamente</strong>, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa.</p>
-<p>Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores “reviews” tienden a tener menor disponibilidad en la plataforma.</p>
+<p>De esto se puede inferir que si aumentan las puntuaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido, ya que los alojamientos con mejores “reviews” tienden a tener menor disponibilidad en la plataforma.</p>
+<!-- ## Scores -->
+<!-- ## T2 y SPE - Limpieza ? - Formulas ? -->
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

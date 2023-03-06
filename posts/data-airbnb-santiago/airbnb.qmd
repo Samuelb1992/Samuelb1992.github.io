@@ -174,11 +174,13 @@ ya que estas poseen más del **90% de datos faltantes** y no serán útiles para
 
 Además de eliminar las variables que se comentaron en la sección anterior, también deberán eliminarse algunas variables que no aportan información ya que son ***id*** específicos  o variables que contienen información de tipo descriptivo como ***links***.
 
+También se prescindirá de la información geográfica (latitud y longitud).
+
 ```{r}
 # variables con > 90% de faltantes
 var.na <- names(na.count[1:5])
 # variables id - links
-var.drop <- c("id","listing_url","scrape_id","last_scraped","source","picture_url","host_id","host_url","host_about","host_thumbnail_url","host_picture_url")
+var.drop <- c("id","listing_url","scrape_id","last_scraped","source","picture_url","host_id","host_url","host_about","host_thumbnail_url","host_picture_url","latitude","longitude")
 
 # Quitandolas del dataset
 air.stgo <- 
@@ -189,9 +191,16 @@ air.stgo <-
 
 # Análisis de Componentes Principales (PCA)
 
-Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico o en su caso binarias (0/1).
+Un PCA es una técnica estadística que permite la reducción de la dimensionalidad de una matriz de datos. Intuitivamente esta técnica nos permitirá explorar relaciones entre variables y observaciones de la manera que generalmente los humanos obtenemos conclusiones, que es a través de gráficos en dos dimensiones.
 
-*Si se quisieran incluir variables de tipo categórico en este análisis se podría transformar estas variables en variables dummy, aunque no es el objetivo de este análisis*
+:::{.callout-note}
+## Casos de uso del PCA
+PCA se usa en diversas aplicaciones como compresión de imágenes , biometría , bioinformática , control de calidad , entre otros.
+:::
+
+Un PCA sólo se puede realizar sobre variables numéricas. Por ende, en este caso se utilizarán solo variables de tipo numérico (incluyendo binarias 0/1).
+
+**Si se quisieran incluir variables de tipo categórico en este análisis, se podría transformar estas variables en variables dummy (*0/1 para cada categoría de la variable*), aunque no es el objetivo de este análisis y existen otras técnicas más adecuadas para modelar datos de tipo categórico.**
 
 ```{r Filtrado}
 # Seleccionar variables de tipo numerico
@@ -204,12 +213,13 @@ var.pca <- do.call(rbind, lapply(air.stgo, class))%>%
 El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables puede llevar a conclusiones erróneas. 
 
 :::{.callout-tip}
-Gran parte de las veces es recomendable **escalar y centrar** las variables antes de aplicar PCA, ya que por lo general se tienen variables diversas con distintas escalas y magnitudes. 
+## Escalado y Centrado
+Gran parte de las veces es recomendable **escalar (varianza unitaria) y centrar (media cero)** las variables antes de aplicar PCA, ya que por lo general, se tienen diversas variables con distintas escalas y magnitudes. 
 Analiza tus datos y prueba distintas técnicas de preprocesamiento que sean coherentes con el análisis que estas realizando.
 :::
 
 
-Realizando el preprocesamiento y ajustando PCA con la función *PCA* de la librería *FactoMiner*:
+Realizando el preprocesamiento y ajustando lel PCA con la función *PCA* de la librería ***FactoMiner***:
 
 ```{r PCA}
 #| warning: false
@@ -218,12 +228,29 @@ pca.air <- PCA(scale(air.stgo[,var.pca],
                      scale = TRUE) , 
                graph = FALSE , 
                scale.unit = FALSE)
+```
+
+
+Una vez ajustado el modelo, el primer gráfico que observaremos será el llamado *scree plot*. Este gráfico muestra cual es el porcentaje de varianza explicada por cada componente principal.
+
+```{r PCA_scree}
+#| out-width: 70%
+#| out-height: 70%
+#| fig-align: center
 fviz_eig(pca.air , addlabels = TRUE)
 ```
 
+Sin ahondar en lo teórico, es necesario entender que al aplicar esta técnica lo que estamos generando son **nuevas variables (variables latentes)**, las cuales son una **combinación lineal de las variables originales** e intentan "explicar" la mayor cantidad de información posible de la matriz de datos original.
+
 Se observa que con **7 componentes principales** se puede explicar alrededor del **65% de la variabilidad de los datos**. A partir de las siguientes componentes el porcentaje explicado por cada componente disminuye considerablemente.
 
-Para observar las relaciones entre las variables se verá el **Loading plot (LP)**:
+Notemos que el número de variables de la matriz de datos con que se realizó el PCA era de `r dim(air.stgo[,var.pca])[2]` y con la "nueva representación" el número de variables se reduce a 7 captando el 65% de la información original.
+
+## Loadings
+
+Para observar las relaciones entre las variables se verán los **loading Plot (LP)**
+
+Primero vemos el LP de la primera componente (Dim1) vs la segunda componente (Dim2):
 
 ```{r}
 #| out-width: 100%
@@ -247,12 +274,12 @@ pca.air$var$coord %>%
   kable_styling(bootstrap_options = c("striped","hover","condensed"), full_width = F , font_size = 12)
 ```
 
-Que estén cercanas nos indica que estas variables están **muy correlacionadas** entre sí y por ende se puede inferir que al evaluar un alojamiento el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc).
+Que estén cercanas nos indica que estas variables están **muy correlacionadas** entre sí. De esto se puede inferir que al evaluar un alojamiento, el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc).
 Obviamente la variable ***review_scores_rating*** esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.
 
-Ya realizando algunas suposiciones más detalladas podemos observar que la variable más cercana a ***review_scores_rating*** es la variable ***review_scores_location***. De esto podríamos suponer que la plataforma **le da un mayor peso al ítem ubicación y por ende la calificación final se asemeja de mayor manera a la puntuación en este ítem**.
+Ya realizando algunas suposiciones más detalladas, podemos observar que la variable más cercana a ***review_scores_rating*** es la variable ***review_scores_location***. De esto podríamos suponer que la plataforma **le da un mayor peso al ítem ubicación , por lo que la calificación final se asemeja de mayor manera a la puntuación en este ítem**.
 
-2. En la parte izquierda ,en el tercer cuadrante, podemos observar a las variables de disponibilidad ( ***availability*** ) muy cercanas por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.
+2. En la parte izquierda, en el tercer cuadrante, podemos observar a las variables de disponibilidad ( ***availability*** ) muy cercanas, por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.
 
 3. Podemos observar que las variables de **"review"** y **"disponibilidad"** están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:
 
@@ -290,6 +317,8 @@ pca.coord[c(review.var,avai.var[-3]),] %>%
 
 Esto implica que las variables están **correlacionadas negativamente**, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa. 
 
-Si se quiere dar una interpretación tangible se puede decir que si aumentan las calificaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido ya que los alojamientos con mejores "reviews" tienden a tener menor disponibilidad en la plataforma.
+De esto se puede inferir que si aumentan las puntuaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido, ya que los alojamientos con mejores "reviews" tienden a tener menor disponibilidad en la plataforma.
 
+<!-- ## Scores -->
 
+<!-- ## T2 y SPE - Limpieza ? - Formulas ? -->
