@@ -4,6 +4,7 @@ project:
 
 website:
   title: "Samuel Beltrán"
+  google-analytics: "G-PETD747FB9"
   navbar:
     background: "#00ABB3"
     foreground: "#FFFFFF"
