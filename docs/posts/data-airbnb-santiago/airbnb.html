@@ -2,22 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="dcterms.date" content="2022-10-11">
 
-<title>Samuel Beltrán - Airbnb Santiago</title>
+<title>Airbnb Santiago – Samuel Beltrán</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -28,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -42,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -104,7 +80,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -113,8 +95,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-PETD747FB9"></script>
@@ -126,7 +110,6 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 </script>
-
 <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
@@ -137,38 +120,44 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="../../index.html">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Samuel Beltrán</span>
-  </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">Inicio</a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Inicio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">Acerca de mi</a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Acerca de mi</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Samuelb1992"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/Samuelb1992"> <i class="bi bi-github" role="img">
 </i> 
- </a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Tabla de Contenidos</h2>
    
   <ul>
@@ -188,8 +177,9 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
   </ul>
 </nav>
 </nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -215,15 +205,15 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
       <p class="date">October 11, 2022</p>
     </div>
   </div>
+  
     
   </div>
   
 
+
 </header>
 
-<div class="cell">
 
-</div>
 <!-- ![Foto de <a href="https://unsplash.com/es/@caaaaaaaaaio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Caio Silva</a> en <a href="https://unsplash.com/es?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> -->
 <!--   ](santiago.jpg){height=60px width=100%} -->
 <p>Este es el primero de una serie de post donde se analizará un conjunto de datos sobre alojamientos Airbnb en Santiago de Chile.</p>
@@ -235,64 +225,61 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 </section>
 <section id="análisis-exploratorio" class="level1">
 <h1>Análisis Exploratorio</h1>
-<div class="cell">
-
-</div>
 <p>El conjunto de datos tiene <strong>8574 observaciones (alojamientos) con 75 variables</strong> (características de los alojamientos). Cada una de estas variables está descrita detalladamente en el <a href="https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit?usp=sharing">Diccionario de datos</a>.</p>
 <p>Algunas variables del dataset analizar son:</p>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;"> Variable </th>
-   <th style="text-align:left;"> Descripción </th>
-  </tr>
- </thead>
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Variable</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Descripción</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> name </td>
-   <td style="text-align:left;"> Nombre </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> bedrooms </td>
-   <td style="text-align:left;"> Número de habitaciones </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> beds </td>
-   <td style="text-align:left;"> Cantidad total de camas </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> amenities </td>
-   <td style="text-align:left;"> Servicios adicionales como Wifi, Calefacción, Gym, etc. </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> price </td>
-   <td style="text-align:left;"> Precio por noche </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> number_of_reviews </td>
-   <td style="text-align:left;"> Número de reseñas recibidas </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> first_review </td>
-   <td style="text-align:left;"> Fecha de la primera reseña recibida </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> last_review </td>
-   <td style="text-align:left;"> Fecha de la última reseña recibida </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:left;"> Puntaje general del alojamiento </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> reviews_per_month </td>
-   <td style="text-align:left;"> Cantidad de reseñas por mes que recibe el alojamiento </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">Nombre</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bedrooms</td>
+<td style="text-align: left;">Número de habitaciones</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">beds</td>
+<td style="text-align: left;">Cantidad total de camas</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">amenities</td>
+<td style="text-align: left;">Servicios adicionales como Wifi, Calefacción, Gym, etc.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">Precio por noche</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_of_reviews</td>
+<td style="text-align: left;">Número de reseñas recibidas</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">first_review</td>
+<td style="text-align: left;">Fecha de la primera reseña recibida</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">last_review</td>
+<td style="text-align: left;">Fecha de la última reseña recibida</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_rating</td>
+<td style="text-align: left;">Puntaje general del alojamiento</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reviews_per_month</td>
+<td style="text-align: left;">Cantidad de reseñas por mes que recibe el alojamiento</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -300,373 +287,361 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="variables">Variables</h2>
 <p>Para entender mejor el dataset y las variables que se analizarán veremos la clase actual de cada variable.</p>
 <div class="cell">
-
-</div>
-<div class="cell">
 <div class="cell-output-display">
-
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; "><table class="kable_wrapper table table-striped table-hover table-condensed" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; ">
+<table class="kable_wrapper table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
 <tbody>
-  <tr>
-   <td> 
-
-<table>
+<tr class="odd">
+<td><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <tbody>
-  <tr>
-   <td style="text-align:left;"> listing_url </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> last_scraped </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> source </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> name </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> description </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> neighborhood_overview </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> picture_url </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_url </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_name </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_since </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_location </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_about </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_response_time </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_response_rate </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_acceptance_rate </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_is_superhost </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_thumbnail_url </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_picture_url </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_neighbourhood </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_verifications </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_has_profile_pic </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_identity_verified </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> neighbourhood </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> neighbourhood_cleansed </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> property_type </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> room_type </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> bathrooms_text </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> amenities </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> price </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> has_availability </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calendar_last_scraped </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> first_review </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> last_review </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> license </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> instant_bookable </td>
-   <td style="text-align:left;"> character </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">listing_url</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">last_scraped</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">source</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">name</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">description</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">neighborhood_overview</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">picture_url</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_url</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_name</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_since</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_location</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_about</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_response_time</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_response_rate</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_acceptance_rate</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_is_superhost</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_thumbnail_url</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_picture_url</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_neighbourhood</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_verifications</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_has_profile_pic</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_identity_verified</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">neighbourhood</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">neighbourhood_cleansed</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">property_type</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">room_type</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bathrooms_text</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">amenities</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">price</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">has_availability</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">calendar_last_scraped</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">first_review</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">last_review</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">license</td>
+<td style="text-align: left;">character</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">instant_bookable</td>
+<td style="text-align: left;">character</td>
+</tr>
+</tbody>
+</table></td>
+<td><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">host_id</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">host_listings_count</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">host_total_listings_count</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">accommodates</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bedrooms</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">beds</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">minimum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">minimum_minimum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_minimum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">minimum_maximum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_maximum_nights</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">availability_30</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">availability_60</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">availability_90</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">availability_365</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">number_of_reviews</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">number_of_reviews_ltm</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">number_of_reviews_l30d</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">calculated_host_listings_count</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">calculated_host_listings_count_entire_homes</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">calculated_host_listings_count_private_rooms</td>
+<td style="text-align: left;">integer</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">calculated_host_listings_count_shared_rooms</td>
+<td style="text-align: left;">integer</td>
+</tr>
+</tbody>
+</table></td>
+<td><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">neighbourhood_group_cleansed</td>
+<td style="text-align: left;">logical</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bathrooms</td>
+<td style="text-align: left;">logical</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">calendar_updated</td>
+<td style="text-align: left;">logical</td>
+</tr>
+</tbody>
+</table></td>
+<td><table class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">id</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">scrape_id</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">latitude</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">longitude</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">minimum_nights_avg_ntm</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">maximum_nights_avg_ntm</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_rating</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_accuracy</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_cleanliness</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_checkin</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_communication</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_location</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_value</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">reviews_per_month</td>
+<td style="text-align: left;">numeric</td>
+</tr>
+</tbody>
+</table></td>
+</tr>
 </tbody>
 </table>
-
- </td>
-   <td> 
-
-<table>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> host_id </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_listings_count </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> host_total_listings_count </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> accommodates </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> bedrooms </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> beds </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> minimum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> maximum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> minimum_minimum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> maximum_minimum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> minimum_maximum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> maximum_maximum_nights </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_30 </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_60 </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_90 </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_365 </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> number_of_reviews </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> number_of_reviews_ltm </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> number_of_reviews_l30d </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calculated_host_listings_count </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calculated_host_listings_count_entire_homes </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calculated_host_listings_count_private_rooms </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calculated_host_listings_count_shared_rooms </td>
-   <td style="text-align:left;"> integer </td>
-  </tr>
-</tbody>
-</table>
-
- </td>
-   <td> 
-
-<table>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> neighbourhood_group_cleansed </td>
-   <td style="text-align:left;"> logical </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> bathrooms </td>
-   <td style="text-align:left;"> logical </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> calendar_updated </td>
-   <td style="text-align:left;"> logical </td>
-  </tr>
-</tbody>
-</table>
-
- </td>
-   <td> 
-
-<table>
-<tbody>
-  <tr>
-   <td style="text-align:left;"> id </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> scrape_id </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> latitude </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> longitude </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> minimum_nights_avg_ntm </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> maximum_nights_avg_ntm </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> reviews_per_month </td>
-   <td style="text-align:left;"> numeric </td>
-  </tr>
-</tbody>
-</table>
-
- </td>
-  </tr>
-</tbody>
-</table></div>
+</div>
 
 </div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:right;"> character </th>
-   <th style="text-align:right;"> integer </th>
-   <th style="text-align:right;"> logical </th>
-   <th style="text-align:right;"> numeric </th>
-  </tr>
- </thead>
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">character</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">integer</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">logical</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">numeric</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:right;"> 35 </td>
-   <td style="text-align:right;"> 23 </td>
-   <td style="text-align:right;"> 3 </td>
-   <td style="text-align:right;"> 14 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">14</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -714,7 +689,11 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">cex.names =</span> <span class="fl">0.7</span>,</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Porcentaje de Valores Faltantes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="airbnb_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="airbnb_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Se eliminarán directamente las variables:</p>
@@ -748,12 +727,12 @@ gtag('config', 'G-PETD747FB9', { 'anonymize_ip': true});
 <section id="análisis-de-componentes-principales-pca" class="level1">
 <h1>Análisis de Componentes Principales (PCA)</h1>
 <p>Un PCA es una técnica estadística que permite la reducción de la dimensionalidad de una matriz de datos. Intuitivamente esta técnica nos permitirá explorar relaciones entre variables y observaciones de la manera que generalmente los humanos obtenemos conclusiones, que es a través de gráficos en dos dimensiones.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Casos de uso del PCA
 </div>
 </div>
@@ -771,12 +750,12 @@ Casos de uso del PCA
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>El escalado y centrado en estas técnicas de reducción de la dimensionalidad es un punto importante a considerar, ya que el no escalar variables puede llevar a conclusiones erróneas.</p>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
+<div class="callout-title-container flex-fill">
 Escalado y Centrado
 </div>
 </div>
@@ -798,7 +777,7 @@ Escalado y Centrado
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="airbnb_files/figure-html/PCA_scree-1.png" style="width:70.0%;height:70.0%" class="figure-img"></p>
+<p><img src="airbnb_files/figure-html/PCA_scree-1.png" class="quarto-figure quarto-figure-center figure-img" style="width:70.0%;height:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -815,7 +794,11 @@ Escalado y Centrado
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Loading Plot"</span>)<span class="sc">+</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="airbnb_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" style="width:100.0%"></p>
+<div>
+<figure class="figure">
+<p><img src="airbnb_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" style="width:100.0%"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Observando el gráfico se pueden extraer las siguientes conclusiones:</p>
@@ -824,53 +807,53 @@ Escalado y Centrado
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:right;"> Dim.1 </th>
-   <th style="text-align:right;"> Dim.2 </th>
-  </tr>
- </thead>
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.1</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Dim.2</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:right;"> 0.588 </td>
-   <td style="text-align:right;"> 0.139 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:right;"> 0.576 </td>
-   <td style="text-align:right;"> 0.150 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:right;"> 0.567 </td>
-   <td style="text-align:right;"> 0.136 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:right;"> 0.549 </td>
-   <td style="text-align:right;"> 0.155 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:right;"> 0.537 </td>
-   <td style="text-align:right;"> 0.152 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:right;"> 0.508 </td>
-   <td style="text-align:right;"> 0.160 </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:right;"> 0.497 </td>
-   <td style="text-align:right;"> 0.156 </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_value</td>
+<td style="text-align: right;">0.588</td>
+<td style="text-align: right;">0.139</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_accuracy</td>
+<td style="text-align: right;">0.576</td>
+<td style="text-align: right;">0.150</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_communication</td>
+<td style="text-align: right;">0.567</td>
+<td style="text-align: right;">0.136</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_checkin</td>
+<td style="text-align: right;">0.549</td>
+<td style="text-align: right;">0.155</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_cleanliness</td>
+<td style="text-align: right;">0.537</td>
+<td style="text-align: right;">0.152</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_location</td>
+<td style="text-align: right;">0.508</td>
+<td style="text-align: right;">0.160</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_rating</td>
+<td style="text-align: right;">0.497</td>
+<td style="text-align: right;">0.156</td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -882,68 +865,68 @@ Escalado y Centrado
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-
-<table class="table table-striped table-hover table-condensed" style="font-size: 12px; width: auto !important; margin-left: auto; margin-right: auto;">
- <thead>
-  <tr>
-   <th style="text-align:left;">   </th>
-   <th style="text-align:left;"> Dim.1 </th>
-   <th style="text-align:left;"> Dim.2 </th>
-  </tr>
- </thead>
+<table class="table table-striped table-hover table-condensed caption-top table-sm small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th"></th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dim.1</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Dim.2</th>
+</tr>
+</thead>
 <tbody>
-  <tr>
-   <td style="text-align:left;"> review_scores_value </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.588</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.139</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_accuracy </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.576</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.15</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_communication </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.567</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.136</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_checkin </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.549</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.155</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_cleanliness </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.537</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.152</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_location </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.508</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.16</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> review_scores_rating </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.497</span> </td>
-   <td style="text-align:left;"> <span style="     color: green !important;">0.156</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_30 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.514</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.164</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_60 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.5</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.137</span> </td>
-  </tr>
-  <tr>
-   <td style="text-align:left;"> availability_90 </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.476</span> </td>
-   <td style="text-align:left;"> <span style="     color: red !important;">-0.116</span> </td>
-  </tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_value</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.588</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.139</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_accuracy</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.576</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.15</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_communication</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.567</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.136</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_checkin</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.549</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.155</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_cleanliness</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.537</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.152</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">review_scores_location</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.508</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.16</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">review_scores_rating</td>
+<td style="text-align: left;"><span style="     color: green !important;">0.497</span></td>
+<td style="text-align: left;"><span style="     color: green !important;">0.156</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">availability_30</td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.514</span></td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.164</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">availability_60</td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.5</span></td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.137</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">availability_90</td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.476</span></td>
+<td style="text-align: left;"><span style="     color: red !important;">-0.116</span></td>
+</tr>
 </tbody>
 </table>
+
 
 </div>
 </div>
@@ -984,12 +967,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -998,17 +984,73 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
     button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
     setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
       button.setAttribute("title", currentTitle);
       button.classList.remove('code-copy-button-checked');
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1018,43 +1060,308 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
   var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
   for (var i=0; i<bibliorefs.length; i++) {
     const ref = bibliorefs[i];
-    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
-    tippyHover(ref, function() {
-      var popup = window.document.createElement('div');
-      cites.forEach(function(cite) {
-        var citeDiv = window.document.createElement('div');
-        citeDiv.classList.add('hanging-indent');
-        citeDiv.classList.add('csl-entry');
-        var biblioDiv = window.document.getElementById('ref-' + cite);
-        if (biblioDiv) {
-          citeDiv.innerHTML = biblioDiv.innerHTML;
-        }
-        popup.appendChild(citeDiv);
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
       });
-      return popup.innerHTML;
-    });
+    }
   }
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

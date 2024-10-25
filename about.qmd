@@ -10,7 +10,6 @@ about:
     - icon: github
       text: Github
       href: https://github.com/Samuelb1992
-
 ---
 
-Hola mi nombre es Samuel Beltrán, soy de Chile y soy Ingeniero Civil Industrial de profesión. Me interesan los temas relacionados al Análisis de Datos, Ciencia de Datos, Data Analytics, entre otros. Espero puedas encontrar material que sea de tu interés y ayuda en este blog.
+Hola mi nombre es Samuel Beltrán, soy de Chile 🇨🇱 . Me interesan los temas relacionados al Análisis de Datos, Ciencia de Datos, Data Analytics, entre otros. Espero puedas encontrar material que sea de tu interés y ayuda en este blog.

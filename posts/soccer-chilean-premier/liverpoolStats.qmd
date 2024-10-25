@@ -1,0 +1,508 @@
+---
+title: "Goleadores Premier League 2024/2025 - Jornada 8"
+date: "2024-10-25"
+categories: [R, Soccer, gt]
+image: "goleadores.png"
+toc: true
+toc-location: left
+toc-title: "Tabla de Contenidos"
+number-sections: false
+---
+
+```{r Librerias}
+#| warning: false
+#| echo: false
+# install.packages("worldfootballR")
+library(knitr)
+library(worldfootballR)
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(httr2)
+library(jsonlite)
+library(httr)
+library(stringdist)
+library(fuzzyjoin)
+```
+
+<!-- GET_LOGO matched.logo.url |>  filter(Original_Name == "Liverpool") |> pull(download_url) -->
+
+# Introducción
+
+La Premier League, una de las ligas de fútbol más competitivas del mundo ya ha completado 8 de 38 jornadas. En esta entrada, compararemos los goleadores de la Premier a la fecha y algunas de sus estadísticas.
+
+<!-- La 6ta fecha de la Premier League se cerró con la victoria 3 a 1 del ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/AFC%20Bournemouth.png){width="20px" height="20px"} Bournemouth sobre el ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Southampton%20FC.png){width="20px" height="20px"} Southampton, el equipo del chileno Brereton Díaz aún no logra ganar en esta temporada. La tabla de posiciones queda de la siguiente forma: -->
+
+```{r Data_FbRef}
+#| echo: false
+#| warning: false
+
+# url liga 2024-2025
+url.df <- fb_league_urls(country = "ENG", gender = "M", season_end_year = "2025" , tier = "1st")
+# url teams
+teams.premier.df <- fb_teams_urls(url.df)
+# obtener url por nombre equipo 
+name.team <- "Liverpool"
+url.team <- teams.premier.df[grep(name.team,teams.premier.df)]
+# url jugadores del equipo
+url.players <- fb_player_urls(url.team)
+# Estadisticas del equipo - cuadro resumen 
+stats.team <- fb_team_match_results(url.team) 
+# Estadisticas desglosadas
+team.logs <- fb_team_match_log_stats(team_urls = url.team, stat_type = "passing")
+```
+
+```{r Data_FbRef_Players}
+#| echo: false
+#| warning: false
+big5_player_possession <- fb_big5_advanced_season_stats(season_end_year= 2025, stat_type= "shooting", team_or_player= "player")
+
+player.premier.fbref <- big5_player_possession |> 
+  filter(Comp == 'Premier League') |> 
+  group_by(Player, Url) |> 
+  summarise(across(c(Gls_Standard, Sh_Standard, SoT_Standard), sum), Squad = max(Squad)) |> 
+  ungroup()
+```
+
+```{r Data_UnderStat}
+#| echo: false
+#| warning: false
+year.param = 2024
+
+team.names.ustat <- read.csv('/Users/samuelbeltranlastra/Documents/Proyecto R Git/SBstats/data/url_teams_understat.csv')
+
+teams.premier.year <-  team.names.ustat |> filter(year == year.param) |> pull(url)
+
+# Jugadores y estadisticas understat
+players.premier.ustat <- understat_team_players_stats(teams.premier.year)
+
+# Sumamos estadisticas para jugadores que estuvieron en mas de un equipo en la temporada
+
+players.premier.ustat <- players.premier.ustat |> 
+  group_by(season, player_id, player_name) |> 
+  summarise(games = sum(games),
+            time = sum(time),
+            goals = sum(goals),
+            xG = sum(xG),
+            assists = sum(assists),
+            xA = sum(xA),
+            shots = sum(shots),
+            key_passes = sum(key_passes),
+            yellow_cards = sum(yellow_cards),
+            red_cards = sum(red_cards),
+            position = paste0(position, collapse = "-"),
+            team_name = paste0(team_name, collapse = "-"))
+```
+
+<!-- ```{r Logos} -->
+
+<!-- #| echo: false -->
+
+<!-- #| warning: false -->
+
+<!-- # GitHub API URL to list files in a directory -->
+
+<!-- repo.logo <- paste0("https://api.github.com/repos/", "samuelb1992", "/", "football-logos", "/contents/", "logos/England%20-%20Premier%20League", "?ref=", "master") -->
+
+<!-- logo.premier.league <- "https://raw.githubusercontent.com/Samuelb1992/football-logos/master/pl-main-logo.png" -->
+
+<!-- response <- GET(repo.logo) -->
+
+<!-- logo.team.df <- fromJSON(content(response, "text")) -->
+
+<!-- logo.team.df <-  -->
+
+<!--   logo.team.df %>%  -->
+
+<!--   select(name,download_url) -->
+
+<!-- ``` -->
+
+```{r Logos}
+#| echo: false
+#| warning: false
+matched.logo.url <- read.csv("/Users/samuelbeltranlastra/Documents/Proyecto R Git/SBstats/dim_logos_png.csv")
+logo.premier.league <- "https://raw.githubusercontent.com/Samuelb1992/football-logos/master/pl-main-logo.png"
+```
+
+```{r Imagenes_Jugadores}
+#| echo: false
+#| warning: false
+player.logo.url <- read.csv('/Users/samuelbeltranlastra/Documents/Proyecto R Git/Python_Projects/scraperImageEPL/pngPlayersJson.csv')
+```
+
+<!-- ```{r TransformacionTablaPosiciones} -->
+
+<!-- #| echo: false -->
+
+<!-- #| warning: false -->
+
+<!-- premier.stats <- fb_season_team_stats( -->
+
+<!--   season_end_year =  2025, -->
+
+<!--   gender = "M", -->
+
+<!--   country = "ENG",  -->
+
+<!--   tier = "1st", -->
+
+<!--   stat_type = "league_table" -->
+
+<!-- ) -->
+
+<!-- # Columnas a mostrar -->
+
+<!-- premier.stats.table <- premier.stats %>%  -->
+
+<!--   select( -->
+
+<!--     "Equipo" = Squad, -->
+
+<!--     "Part_Jugados" = MP, -->
+
+<!--     "Puntos" = Pts, -->
+
+<!--     "Dif_Goles" = GD, -->
+
+<!--     "Ranking" = Rk, -->
+
+<!--   ) %>%  -->
+
+<!--   arrange(Ranking) -->
+
+<!-- premier.stats.table <-  -->
+
+<!--   premier.stats.table %>%  -->
+
+<!--   left_join(matched.logo.url, by  = c("Equipo"="Original_Name")) %>%  -->
+
+<!--   select(-name) %>%  -->
+
+<!--   rename(ruta_logo = download_url) -->
+
+<!-- # Funcion Tabla -->
+
+<!-- table.function.stats.res <- function(dataset) { -->
+
+<!--   table.jpg <-  -->
+
+<!--     dataset %>% -->
+
+<!--     select(Ranking,ruta_logo,Equipo,Part_Jugados,Dif_Goles,Puntos) %>% -->
+
+<!--     # Filtrar por Ranking -->
+
+<!--     # filter(if(page==1) Ranking <=10 else Ranking >10) %>%  -->
+
+<!--     gt(rowname_col = "Ranking") %>% -->
+
+<!--     # Logo Equipo -->
+
+<!--     text_transform( -->
+
+<!--       locations = cells_body(columns = ruta_logo), -->
+
+<!--       fn = function(x) { -->
+
+<!--         web_image(url = x, height = 30) -->
+
+<!--       } -->
+
+<!--     ) %>% -->
+
+<!--     # Nombre Columnas -->
+
+<!--     cols_label( -->
+
+<!--       Ranking ~" ", -->
+
+<!--       Equipo ~ "Equipo", -->
+
+<!--       Part_Jugados ~ "PJ", -->
+
+<!--       Dif_Goles ~ "DG", -->
+
+<!--       Puntos ~ "**Puntos**", -->
+
+<!--       ruta_logo ~ " ", -->
+
+<!--       .fn = md -->
+
+<!--     )  %>%  -->
+
+<!--     # Titulo Tabla -->
+
+<!--     tab_header( -->
+
+<!--       title = html(paste0(web_image(logo.premier.league),md(" Premier League 2024-2025"))) -->
+
+<!--     ) %>%  -->
+
+<!--     tab_footnote(paste0("Fecha Actualización: ",Sys.Date())) %>%  -->
+
+<!--     # size -->
+
+<!--     tab_options( -->
+
+<!--       data_row.padding = "2px" -->
+
+<!--     ) %>%  -->
+
+<!--     # Fuente -->
+
+<!--     tab_source_note( -->
+
+<!--       source_note = "Fuente Datos: FBref" -->
+
+<!--     ) %>%  -->
+
+<!--   return(table.jpg) -->
+
+<!-- } -->
+
+<!-- # Tabla -->
+
+<!-- # premier.stats.table %>% -->
+
+<!-- #   select(Ranking,ruta_logo,Equipo,Part_Jugados,Dif_Goles,Puntos) %>%  -->
+
+<!-- #   gt(rowname_col = "Ranking") %>% -->
+
+<!-- #   # Logo Equipo -->
+
+<!-- #   text_transform( -->
+
+<!-- #     locations = cells_body(columns = ruta_logo), -->
+
+<!-- #     fn = function(x) { -->
+
+<!-- #       web_image(url = x, height = 35) -->
+
+<!-- #     } -->
+
+<!-- #   ) %>% -->
+
+<!-- #   # Nombre Columnas -->
+
+<!-- #   cols_label( -->
+
+<!-- #     Ranking ~" ", -->
+
+<!-- #     Equipo ~ "Equipo", -->
+
+<!-- #     Part_Jugados ~ "PJ", -->
+
+<!-- #     Dif_Goles ~ "DG", -->
+
+<!-- #     Puntos ~ "**Puntos**", -->
+
+<!-- #     ruta_logo ~ " ", -->
+
+<!-- #     .fn = md -->
+
+<!-- #   )  %>%  -->
+
+<!-- #   # Titulo Tabla -->
+
+<!-- #   tab_header( -->
+
+<!-- #     title = html(paste0(web_image(logo.premier.league),md(" Premier League 2024-2025"))) -->
+
+<!-- #   ) %>%  -->
+
+<!-- #   tab_footnote(paste0("Fecha Actualización: ",Sys.Date())) -->
+
+<!-- ``` -->
+
+<!-- ```{r TablaPosiciones} -->
+
+<!-- #| echo: false -->
+
+<!-- #| warning: false -->
+
+<!-- # listed_tables <- gt_double_table(premier.stats.table, table.function.stats.res, nrows = 20, noisy = TRUE) -->
+
+<!-- # gt_two_column_layout(listed_tables) -->
+
+<!-- total.table <- table.function.stats.res(premier.stats.table) -->
+
+<!-- total.table -->
+
+<!-- ``` -->
+
+<!-- Los ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Liverpool%20FC.png){width="20px" height="20px"} *Reds* de Arne Slot lideran luego del empate del ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Manchester%20City.png){width="20px" height="20px"} City con el ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Newcastle%20United.png){width="20px" height="20px"} Newcastle. -->
+
+# Goleadores de la Premier y sus estadísticas
+
+Antes de mostrar los datos de los goleadores revisé varios blogs y fuentes de datos, donde me encontré con una diversidad de enfoques, gráficos, indicadores y opiniones diversas. La conclusión a la que llegué es que **es muy complejo o imposible definir la calidad de un jugador solo con indicadores**. Las estadísticas de un jugador ayudan a medir su rendimiento, pero claramente hay factores que están fuera del alcance del análisis de datos (por ahora). Además, este tipo de análisis debe ser complementado con la perspectiva de un equipo multidisciplinario del ámbito del deporte. Dicho esto, definamos los datos e indicadores con los que compararemos a los goleadores:
+
+-   **Goles** : Total de goles a la fecha de análisis.
+
+-   **Asistencias** : Total de asistencias a la fecha de análisis.
+
+-   **Goles/xG** : $$\frac{\text{Goles}}{\text{Total xG}}$$
+
+Esta métrica relaciona el total de goles versus el total de *xG* (Expected Goals). El *xG* es la probabilidad de que un tiro se convierta en gol (Hay diversos modelos de xG, en este caso se utiliza el de *Understat*) basado en factores como la posición del tiro, tipo de pase, tipo de ataque, entre otros \[ Más detalles de los modelos *xG* [^1] \]. En general, se espera que un buen goleador tenga más goles que xG acumulados, es decir, su habilidad le permite acertar más goles que las probabilidades que tuvo de marcar goles.
+
+[^1]: <https://fbref.com/en/expected-goals-model-explained/>
+
+-   **Goles (90m)** : $$\frac{\text{Goles}}{\text{Tiempo en cancha}}\cdot90$$
+
+Incorporamos el factor tiempo en cancha del jugador. No es lo mismo marcar 10 goles cuando jugaste los 2 tiempos de todos los partidos, que marcar 8 si entraste solo en los segundos tiempos.
+
+-   **Asistencias (90m)** : $$\frac{\text{Asistencias}}{\text{Tiempo en cancha}}\cdot90$$
+
+-   **G+A (90m)** : $$\frac{\text{Goles + Asistencias}}{\text{Tiempo en cancha}}\cdot90$$
+
+-   **Tiros (90m)** : $$\frac{\text{Tiros}}{\text{Tiempo en cancha}}\cdot90$$
+
+-   **Tiros a puerta (90m)** : $$\frac{\text{Tiros a puerta}}{\text{Tiempo en cancha}}\cdot90$$
+
+En la tabla se ven los 10 goleadores de la Premier ordenados según su cantidad de goles:
+
+```{r UnderStat_Teams}
+#| echo: false
+#| warning: false
+# url.teams.understat <- understat_team_meta(team_name = understat_available_teams(league = 'EPL'))
+url.teams.understat <- read.csv("understat_teams_url.csv")
+url.teams.understat.v2 <- url.teams.understat |> filter(season == "2024/2025")
+```
+
+```{r Understat_Shoots}
+#| echo: false
+#| warning: false
+# epl_shot_location <- understat_league_season_shots(league = "EPL", season_start_year = 2024)
+# write_csv(epl_shot_location,"07_epl_shot_location.csv")
+epl_shot_location <- read.csv("07_epl_shot_location.csv")
+epl_shot_location$ind_goal <- ifelse(epl_shot_location$result == "Goal", 1 , 0)
+
+# Sumamos por jugador todos los xG que ha tenido.. tiros y la cantidad de goles realizados.
+player.goals.xg <- 
+  epl_shot_location |> 
+  group_by(player,player_id) |> 
+  summarise(Goals_Total = sum(ind_goal),
+            xG_Total = sum(xG),
+            Shoots_Total = n()) |> 
+  arrange(desc(Goals_Total), xG_Total)
+
+# Otras estadisticas agregadas ustat
+player.goals.xg.v2 <- left_join(player.goals.xg, players.premier.ustat, by = c("player_id"))
+
+# Otras estadisticas fbref
+player.goals.xg.v3 <- stringdist_left_join(player.goals.xg.v2, 
+                                           player.premier.fbref,
+                                           by = c("player" = "Player", "team_name" = "Squad"),
+                                           method = "jw",
+                                           max_dist = 99,
+                                           distance_col = "dist") |> 
+  group_by(player) |> 
+  arrange(player.dist, team_name.dist) |> 
+  slice(1) |> 
+  ungroup()
+  
+
+# Agregamos url imagen
+p_nombre = 0.7
+p_equipo = 0.3
+player.goals.xg.v4 <- stringdist_left_join(
+  player.goals.xg.v3,
+  player.logo.url,
+  by = c("Player" = "Nombre_Jugador", "team_name" = "Equipo"),
+  method = "jw",
+  max_dist = 99,
+  distance_col = "dist2"
+) |>
+  group_by(Player) |> 
+  arrange(Player.dist2, team_name.dist2) |> 
+  mutate(
+    rank_f = case_when(Player.dist2 == 0 ~ 0,
+                       TRUE ~ Player.dist2 * p_nombre + team_name.dist2 * p_equipo)
+  ) |> 
+  slice_min(order_by = rank_f , n = 1) |> 
+  ungroup()
+  
+decimal.q <- 2
+# Metricas creadas
+player.goals.xg.v5 <- player.goals.xg.v4 |> 
+  mutate(
+    Goles_90 = round((Goals_Total / time) * 90,decimal.q),
+    Asistencias_90 = round((assists / time) * 90,decimal.q),
+    Goles_mas_Asistencias = round((Goals_Total + assists)*90 / time, decimal.q),
+    Ratio_Goles_xG = round(Goals_Total / xG_Total, decimal.q),
+    Tiros_90 = round(Shoots_Total*90 / time, decimal.q),
+    Tiros_a_Puerta_90 = round(SoT_Standard*90 / time, decimal.q)
+  )
+
+# Columnas finales seleccionadas
+player.goals.xg.v6 <- player.goals.xg.v5 |> 
+  select(Url.y, 
+         player_name,
+         Goals_Total,
+         assists,
+         Ratio_Goles_xG,
+         Goles_90, 
+         Asistencias_90, 
+         Goles_mas_Asistencias,
+         Tiros_90,
+         Tiros_a_Puerta_90) |> 
+  arrange(desc(Goals_Total))
+```
+
+```{r Tabla_Goleadores}
+#| echo: false
+#| warning: false
+player.goals.xg.v6 |> 
+  top_n(10, Goals_Total) |> 
+  gt()  |> 
+  text_transform(
+      locations = cells_body(columns = Url.y),
+      fn = function(x) {
+        web_image(url = x, height = 40)
+      }) |>
+  # Colores
+  data_color(
+    columns = c(-Url.y,-player_name),
+    palette = "Greens"
+  ) |>
+  # Agrupar columnas
+  tab_spanner(label = md("**Por 90min**"), columns = c(Goles_90,
+                                               Asistencias_90,
+                                               Goles_mas_Asistencias,
+                                               Tiros_90,
+                                               Tiros_a_Puerta_90)) |> 
+    # Nombre Columnas
+    cols_label(
+      Url.y ~ " ",
+      player_name ~ "**Jugador**",
+      Goals_Total ~ "**Goles**",
+      assists ~ "**Asistencias**",
+      Goles_90 ~"**Goles**",
+      Asistencias_90 ~ "**Asistencias**",
+      Goles_mas_Asistencias ~"**G+A**",
+      Ratio_Goles_xG ~ "**Goles/xG**",
+      Tiros_90 ~ "**Tiros**",
+      Tiros_a_Puerta_90 ~"**Tiros a puerta**",
+      .fn = md
+    ) |> 
+  # Titulo Tabla
+    tab_header(title = "Goleadores Premier League - Jornada 8") |> 
+    tab_options(data_row.padding = "2px") |> 
+    # Fuente
+    tab_source_note(source_note = "Fuente Datos: FBref - Understat") |> 
+    tab_source_note(source_note = "Tabla: Samuel Beltrán") |> 
+    gt_theme_espn()
+  
+```
+
+-   Erling Haaland, el delantero del Manchester City ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Manchester%20City.png){width="20px" height="20px"}, es el goleador de la Premier con **10 Goles en 8 fechas**. También, es el delantero con mayor cantidad de tiros a puerta (por 90m) con **2.75 tiros a puerta cada 90 min**.
+
+-   En el caso de las asistencias, los goleadores que más asistencias han dado son **Cole Palmer 🥶 y Mohamed Salah 🇪🇬** .
+
+-   En el caso del ratio **Goles/*xG* Bryan Mbeumo**, delantero del Brentford ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Brentford%20FC.png){width="20px" height="20px"}, es uno de los goleadores más efectivos, transformando eficazmente sus oportunidades en goles.
+
+-   Al observar los indicadores considerando el tiempo en cancha [^2] de los jugadores, destaca claramente **Jhon Durán**. El joven delantero del Aston Villa ![icon](https://raw.githubusercontent.com/Samuelb1992/football-logos/master/logos/England%20-%20Premier%20League/Aston%20Villa.png){width="20px" height="20px"} **ha marcado 4 goles entrando a jugar en los segundos tiempos** convirtiéndose en un revulsivo fiable para Unai Emery 🧛‍♂️.
+
+[^2]: Tiempo en cancha de Understat.
+
+Aún quedan 30 jornadas por jugar, pero si todo sigue igual todo apunta a que Haaland será nuevamente el goleador de la Premier League ⚽ .
