@@ -1,0 +1,100 @@
+---
+title: "Construyendo un Dashboard con Quarto"
+description: "Utilizamos el formato Quarto Dashboard para crear un panel de la Copa Libertadores 2024"
+date: "2024-11-15"
+draft: true
+categories: [R, Soccer, gt, Quarto]
+image: ""
+toc: true
+toc-location: left
+toc-title: "Tabla de Contenidos"
+number-sections: false
+---
+
+```{r Librerias}
+#| warning: false
+#| echo: false
+# install.packages("worldfootballR")
+library(knitr)
+library(worldfootballR)
+library(tidyverse)
+library(gt)
+library(gtExtras)
+library(httr2)
+library(jsonlite)
+library(httr)
+library(nanoparquet)
+library(clipr)
+```
+
+# Introducción
+
+```{r DataJugadores_FbRef}
+
+# Jugadores Liga Chilena (xG no disponible, Pases tampoco tenemos disponibles, GCA no, Defensa algunos datos, possesion tampoco, )
+
+df.chile.fbref <- fb_player_season_stats("https://fbref.com/en/players/dc224436/Erick-Wiemberg",
+
+                                         stat_type = "misc"
+
+                                         )
+
+#----- can use for a single player: -----#
+
+df.fbref <- fb_player_season_stats("https://fbref.com/en/players/dc224436/Erick-Wiemberg", stat_type = "standard")
+
+dplyr::glimpse(df.fbref)
+
+```
+
+```{r Scraping_Libertadores2024}
+
+# summary
+
+# passing
+
+# passing_types
+
+# defense
+
+# possession
+
+# misc
+
+# keeper
+
+# Partidos 2024
+
+df.libertadores.url <- fb_match_urls(country = "", gender = "M", season_end_year = 2024, tier = "", non_dom_league_url = "https://fbref.com/en/comps/14/history/Copa-Libertadores-Seasons")
+
+# Datos por tipo
+
+df.sum.player.match <- fb_advanced_match_stats(match_url = df.libertadores.url, stat_type = "summary", team_or_player = "player")
+
+# Ejemplo formato parquet
+
+# write_parquet(df.sum.player.match, "player_data_libertadores2024.parquet")
+
+```
+
+```{r Carga_Datos_Parquet}
+df.summary <- read_parquet("player_summary.parquet")
+df.passing <- read_parquet("player_passing.parquet")
+df.passing.type <- read_parquet("player_passing_type.parquet")
+df.possession <- read_parquet("player_possession.parquet")
+df.defense <- read_parquet("player_defense.parquet")
+df.keeper <- read_parquet("player_keeper.parquet") # Dimension distinta
+df.misc <- read_parquet("player_misc.parquet")
+```
+
+```{r}
+#----- for a single player: -----#
+bio_test <- tm_player_bio(player_url = "https://www.transfermarkt.es/lionel-messi/profil/spieler/28003")
+dplyr::glimpse(bio_test)
+
+#----- for multiple players: -----#
+# # can make use of a tm helper function:
+# burnley_player_urls <- tm_team_player_urls(team_url = "https://www.transfermarkt.com/fc-burnley/startseite/verein/1132/saison_id/2020")
+# # then pass all those URLs to the tm_player_bio
+# burnley_bios <- tm_player_bio(player_urls = burnley_player_urls)
+```

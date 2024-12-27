@@ -1,0 +1,50 @@
+---
+title: ""
+orientation: rows
+format: dashboard
+expandable: false
+---
+
+
+##  {height="300px"}
+
+### Column {width="300px"}
+
+::: {.card title="Copa Libertadores 2024"}
+[![](dash_screenshots/dash_cap1.png)](https://samuelb1992.github.io/copalibertadores2024/)
+
+Dashboard con datos de resumen de la Copa Libertadores de América 2024.
+
+
+
+:::
+
+<!-- ### Column {width="20%"} -->
+
+<!-- ::: {.card title="Copa Libertadores 2024"} -->
+<!-- [![Caption](Asunto.png)](https://quarto.org) -->
+<!-- ::: -->
+
+<!-- ##  {height="40%"} -->
+
+<!-- ### -->
+
+<!-- ::: {.card title="Premier league"  .flow} -->
+<!-- [![Caption](Asunto.png)](https://quarto.org) -->
+<!-- ::: -->
+
+
+<!-- ### -->
+
+<!-- ::: {.card title="Copa Libertadores 2024" .flow} -->
+<!-- [![Caption](Asunto.png)](https://quarto.org) -->
+<!-- ::: -->
+
+<!-- ### -->
+
+<!-- ::: {.card title="Copa Libertadores 2024" .flow} -->
+<!-- [![Caption](Asunto.png)](https://quarto.org) -->
+<!-- ::: -->
+
+
+

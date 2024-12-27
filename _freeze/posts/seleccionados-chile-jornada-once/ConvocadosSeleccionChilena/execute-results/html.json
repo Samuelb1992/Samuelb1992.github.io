@@ -1,0 +1,15 @@
+{
+  "hash": "2f39ce3fd242ed1fd8902bf75247f8c7",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Convocados Selección Chilena - Jornada 11\"\ndate: \"2024-11-15\"\ncategories: [R, Soccer, gt]\nimage: \"\"\ntoc: true\ntoc-location: left\ntoc-title: \"Tabla de Contenidos\"\nnumber-sections: false\n---\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

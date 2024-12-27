@@ -1,17 +1,10 @@
 [
   {
-    "objectID": "posts/soccer-chilean-premier/liverpoolStats.html#tabla-posiciones---premier-league",
-    "href": "posts/soccer-chilean-premier/liverpoolStats.html#tabla-posiciones---premier-league",
-    "title": "Premier League 2024/2025",
-    "section": "Tabla Posiciones - Premier League",
-    "text": "Tabla Posiciones - Premier League\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n Premier League 2024-2025\n\n\n\n\nEquipo\nPJ\nDG\nPuntos\n\n\n\n\n1\n\nLiverpool\n6\n10\n15\n\n\n2\n\nManchester City\n6\n8\n14\n\n\n3\n\nArsenal\n6\n7\n14\n\n\n4\n\nChelsea\n6\n8\n13\n\n\n5\n\nAston Villa\n6\n3\n13\n\n\n6\n\nFulham\n6\n3\n11\n\n\n7\n\nNewcastle Utd\n6\n1\n11\n\n\n8\n\nTottenham\n6\n7\n10\n\n\n9\n\nBrighton\n6\n2\n9\n\n\n10\n\nNott'ham Forest\n6\n1\n9\n\n\n11\n\nBournemouth\n6\n-1\n8\n\n\n12\n\nBrentford\n6\n-2\n7\n\n\n13\n\nManchester Utd\n6\n-3\n7\n\n\n14\n\nWest Ham\n6\n-4\n5\n\n\n15\n\nIpswich Town\n6\n-5\n4\n\n\n16\n\nEverton\n6\n-8\n4\n\n\n17\n\nLeicester City\n6\n-4\n3\n\n\n18\n\nCrystal Palace\n6\n-4\n3\n\n\n19\n\nSouthampton\n6\n-9\n1\n\n\n20\n\nWolves\n6\n-10\n1\n\n\n\nFecha Actualización: 2024-10-03"
-  },
-  {
-    "objectID": "posts/soccer-chilean-premier/liverpoolStats.html#mejores-jugadores-de-la-premier-según-las-estadísticas",
-    "href": "posts/soccer-chilean-premier/liverpoolStats.html#mejores-jugadores-de-la-premier-según-las-estadísticas",
-    "title": "Premier League 2024/2025",
-    "section": "Mejores jugadores de la Premier (Según las estadísticas)",
-    "text": "Mejores jugadores de la Premier (Según las estadísticas)\n\nGoleador\n\n\nAsistidor\n\n\nGoal Participation s"
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Acerca de mi",
+    "section": "",
+    "text": "Hola mi nombre es Samuel Beltrán, soy de Chile 🇨🇱 . Me interesan los temas relacionados al Análisis de Datos, Ciencia de Datos, Data Analytics, entre otros. Espero puedas encontrar material que sea de tu interés y ayuda en este blog."
   },
   {
     "objectID": "posts/data-airbnb-santiago/airbnb.html",
@@ -35,34 +28,6 @@
     "text": "Loadings\nPara observar las relaciones entre las variables se verán los loading Plot (LP)\nPrimero vemos el LP de la primera componente (Dim1) vs la segunda componente (Dim2):\n\nfviz_pca_var(pca.air, geom = c(\"point\" , \"text\") , labelsize = 2)+\n  ggtitle(\"Loading Plot\")+\n  theme(plot.title = element_text(hjust = 0.5))\n\n\n\n\n\n\n\n\nObservando el gráfico se pueden extraer las siguientes conclusiones:\n\nEn la parte derecha del gráfico (1er cuadrante) se observa un grupo de variables muy cercanas. Estas son las variables de tipo “review”, los cuales son los puntajes que dejan los huéspedes al alojamiento una vez que terminaron su estancia. Si vemos sus coordenadas específicas en el LP:\n\n\n\n\n\n\n\nDim.1\nDim.2\n\n\n\n\nreview_scores_value\n0.588\n0.139\n\n\nreview_scores_accuracy\n0.576\n0.150\n\n\nreview_scores_communication\n0.567\n0.136\n\n\nreview_scores_checkin\n0.549\n0.155\n\n\nreview_scores_cleanliness\n0.537\n0.152\n\n\nreview_scores_location\n0.508\n0.160\n\n\nreview_scores_rating\n0.497\n0.156\n\n\n\n\n\n\n\nQue estén cercanas nos indica que estas variables están muy correlacionadas entre sí. De esto se puede inferir que al evaluar un alojamiento, el huésped tiende a evaluar de manera similar todos los aspectos (comunicación, limpieza , ubicación , etc). Obviamente la variable review_scores_rating esta cerca de cada uno de estos aspectos ya que este indicador engloba a todos los demás aspectos.\nYa realizando algunas suposiciones más detalladas, podemos observar que la variable más cercana a review_scores_rating es la variable review_scores_location. De esto podríamos suponer que la plataforma le da un mayor peso al ítem ubicación , por lo que la calificación final se asemeja de mayor manera a la puntuación en este ítem.\n\nEn la parte izquierda, en el tercer cuadrante, podemos observar a las variables de disponibilidad ( availability ) muy cercanas, por lo que un alojamiento que tenga poca disponibilidad en 30 días tenderá a tener menos disponibilidad en los próximos 60 y 90 días.\nPodemos observar que las variables de “review” y “disponibilidad” están en los extremos. Por decirlo de alguna forma tienen la mismas coordenadas pero con signo contrario:\n\n\n\n\n\n\n\nDim.1\nDim.2\n\n\n\n\nreview_scores_value\n0.588\n0.139\n\n\nreview_scores_accuracy\n0.576\n0.15\n\n\nreview_scores_communication\n0.567\n0.136\n\n\nreview_scores_checkin\n0.549\n0.155\n\n\nreview_scores_cleanliness\n0.537\n0.152\n\n\nreview_scores_location\n0.508\n0.16\n\n\nreview_scores_rating\n0.497\n0.156\n\n\navailability_30\n-0.514\n-0.164\n\n\navailability_60\n-0.5\n-0.137\n\n\navailability_90\n-0.476\n-0.116\n\n\n\n\n\n\n\nEsto implica que las variables están correlacionadas negativamente, es decir , si aumenta el valor de una tenderá a disminuir el valor de la otra y viceversa.\nDe esto se puede inferir que si aumentan las puntuaciones de un alojamiento, este tenderá a tener menor disponibilidad en los próximos 30, 60 y 90 días. Esto tiene sentido, ya que los alojamientos con mejores “reviews” tienden a tener menor disponibilidad en la plataforma."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Samuel Beltrán",
-    "section": "",
-    "text": "Goleadores Premier League 2024/2025 - Jornada 8\n\n\n\nR\n\n\nSoccer\n\n\ngt\n\n\n\n\n\n\n\n\n\n\nOct 25, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAirbnb Santiago\n\n\n\nR\n\n\nPCA\n\n\nEDA\n\n\n\n\n\n\n\n\n\n\nOct 11, 2022\n\n\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Acerca de mi",
-    "section": "",
-    "text": "Hola mi nombre es Samuel Beltrán, soy de Chile 🇨🇱 . Me interesan los temas relacionados al Análisis de Datos, Ciencia de Datos, Data Analytics, entre otros. Espero puedas encontrar material que sea de tu interés y ayuda en este blog."
-  },
-  {
-    "objectID": "posts/soccer-chilean-premier/liverpoolStats.html",
-    "href": "posts/soccer-chilean-premier/liverpoolStats.html",
-    "title": "Goleadores Premier League 2024/2025 - Jornada 8",
-    "section": "",
-    "text": "La Premier League, una de las ligas de fútbol más competitivas del mundo ya ha completado 8 de 38 jornadas. En esta entrada, compararemos los goleadores de la Premier a la fecha y algunas de sus estadísticas."
-  },
-  {
-    "objectID": "posts/soccer-chilean-premier/liverpoolStats.html#footnotes",
-    "href": "posts/soccer-chilean-premier/liverpoolStats.html#footnotes",
-    "title": "Goleadores Premier League 2024/2025 - Jornada 8",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nhttps://fbref.com/en/expected-goals-model-explained/↩︎\nTiempo en cancha de Understat.↩︎"
-  },
-  {
     "objectID": "posts/soccer-premier-octava/PremierGoleadoresOctava.html",
     "href": "posts/soccer-premier-octava/PremierGoleadoresOctava.html",
     "title": "Goleadores Premier League 2024/2025 - Jornada 8",
@@ -75,5 +40,12 @@
     "title": "Goleadores Premier League 2024/2025 - Jornada 8",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nhttps://fbref.com/en/expected-goals-model-explained/↩︎\nTiempo en cancha de Understat.↩︎"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Samuel Beltrán",
+    "section": "",
+    "text": "Goleadores Premier League 2024/2025 - Jornada 8\n\n\n\nR\n\n\nSoccer\n\n\ngt\n\n\n\n\n\n\n\n\n\n\nOct 25, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAirbnb Santiago\n\n\n\nR\n\n\nPCA\n\n\nEDA\n\n\n\n\n\n\n\n\n\n\nOct 11, 2022\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]
