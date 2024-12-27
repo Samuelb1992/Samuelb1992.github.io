@@ -5,6 +5,9 @@
 $font-family-base: 'Montserrat' !default;
 $headings-font-family: 'Roboto', !default;
 $font-size-base: 0.9rem !default;
+$color-headers: #212529;
+$color-background: #343A40;
+
 
 
 $h1-font-size:                $font-size-base * 2 !default;
@@ -16,3 +19,30 @@ $h6-font-size:                $font-size-base !default;
 
 
 /*-- scss:rules --*/
+
+body {
+    background-color: $color-background;
+    /* or the value of $color-background */
+}
+
+.navbar {
+    background-color: $color-headers;
+    /* or the value of $color-background */
+    font-size: 14px;
+}
+
+.card-header {
+    background-color: $color-headers;
+    font-size: 14px;
+}
+
+.card-header {
+    background-color: $color-headers;
+    font-size: 14px;
+}
+
+/*solo texto del titulo*/
+
+.card-title {
+    font-weight: bold;
+}

@@ -6,8 +6,6 @@ website:
   title: "Samuel Beltrán"
   google-analytics: "G-PETD747FB9"
   navbar:
-    background: "#00ABB3"
-    foreground: "#FFFFFF"
     left:
       - text: "Inicio"
         file: index.qmd
@@ -18,7 +16,6 @@ website:
         href: https://github.com/Samuelb1992
 format:
   html:
-    theme: theme.scss
-
-
-
+    theme:
+    - darkly
+    - theme.scss
